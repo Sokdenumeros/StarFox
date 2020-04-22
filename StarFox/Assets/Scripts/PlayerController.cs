@@ -7,10 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float speed_constant;
+    private int count;
+    public Text countText;
+    public Text winText;
 
     void Start()
     {
-     
+
+        count = 2;
+        SetCountText();
+        winText.text = "";
+
     }
 
     void FixedUpdate()
@@ -28,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void ClampPosition()
+    void ClampPosition() //funcio per a fer que hi hagin limits invisibles a les vores
     {
 
         /*Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
@@ -54,14 +61,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
+        Destroy(collision.collider.gameObject);
+        --count;
+        SetCountText();
+        
+    }
 
-        if (other.gameObject.CompareTag("Pilar"))
+    void SetCountText()
+    {
+        countText.text = "Lifes: " + count.ToString();
+        if (count == 0)
         {
-            other.gameObject.SetActive(false);
+            Destroy(gameObject);
+            winText.text = "YOU LOST";
         }
-
+        
     }
 
 
