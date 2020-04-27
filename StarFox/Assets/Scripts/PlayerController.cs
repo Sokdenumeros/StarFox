@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
         Vector3 constant = new Vector3(0.0f, 0.0f, 1);
 
+        transform.eulerAngles = new Vector3(-moveVertical * 20, 0.0f,-moveHorizontal*20);
+
+
         movementController(movement, constant);
         RotationController();
 
