@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pilar
+  - Enemy
+  - Enemy_Projectile
+  - Projectile
   layers:
   - Default
   - TransparentFX

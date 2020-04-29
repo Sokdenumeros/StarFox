@@ -58,14 +58,14 @@ public class PlayerController : MonoBehaviour
         ClampPosition();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy_Projectile")) {
+         if (other.gameObject.CompareTag("Enemy_Projectile")) {
+        
             damage(10);
-            Destroy(collision.collider.gameObject);
+            Destroy(other.gameObject);
             SetCountText();
         }
-        else kill();
     }
 
     void damage(int damage) {
@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
         p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
         p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         pps.speed = 100;
+        pps.tago = "Projectile";
+        pps.movement = new Vector3(0.0f, 0.0f, 1.0f);
         pps.player = gameObject;
     }
 }
