@@ -7,9 +7,16 @@ public class ProjectileScript : MonoBehaviour
     public int damage;
     public int speed;
     public GameObject player;
+    public GameObject enemy;
     public Vector3 movement;
     public string tago;
+    public AudioSource enemykill;
 
+
+    void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,8 +38,11 @@ public class ProjectileScript : MonoBehaviour
 
         if(tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
         {
+
+            enemykill.Play();
             Destroy(other.gameObject);
             Destroy(gameObject);
+
         }
     }
 }

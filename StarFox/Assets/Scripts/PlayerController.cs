@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour
     public Text turboText;
     private bool barrelroll;
     private int rotation;
+    public AudioSource shotsound;
+    public AudioSource enemykill;
+    public AudioSource damaged;
+    public AudioSource spin;
+    public AudioSource nitro;
+    public AudioSource notturbo;
 
 
     void Start()
@@ -34,9 +40,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) shoot();
-        if (Input.GetKeyDown(KeyCode.N)) turboacc();
-        if (Input.GetKeyDown(KeyCode.B)) barrelroll = true;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            shotsound.Play();
+            shoot();
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            turboacc();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            spin.Play();
+            barrelroll = true;
+        }
 
         if(turbo)
         {
@@ -97,10 +114,13 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy_Projectile"))
         {
-
-            damage(10);
-            Destroy(other.gameObject);
-            SetCountText();
+            if (barrelroll == false)
+            {
+                damage(10);
+                Destroy(other.gameObject);
+                SetCountText();
+                damaged.Play();
+            }
         }
 
         if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy"))
@@ -135,21 +155,28 @@ public class PlayerController : MonoBehaviour
         GameObject p = Instantiate(Projectile, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
         p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-        p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
         pps.speed = 100;
         pps.tago = "Projectile";
         pps.movement = new Vector3(0.0f, 0.0f, 1.0f);
         pps.player = gameObject;
+        pps.enemykill = enemykill;
     }
 
     void turboacc()
     {
         if (turbocount > 0)
         {
+            nitro.Play();
             --turbocount;
             turbo = true;
             speed_constant = 20;
             SetTurboText();
+        }
+
+        else
+        {
+            notturbo.Play();
         }
 
     }
