@@ -29,7 +29,7 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        else if(tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
+        if(tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
