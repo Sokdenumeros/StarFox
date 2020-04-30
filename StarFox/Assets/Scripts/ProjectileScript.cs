@@ -19,4 +19,20 @@ public class ProjectileScript : MonoBehaviour
          if ((player.transform.position - gameObject.transform.position).magnitude > 300) Destroy(gameObject);
 
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pilar"))
+        {
+
+            
+            Destroy(gameObject);
+        }
+
+        else if(tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }

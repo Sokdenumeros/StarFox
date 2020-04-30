@@ -11,16 +11,57 @@ public class PlayerController : MonoBehaviour
     public Text winText;
     public GameObject Projectile;
     private int health;
+    private bool turbo;
+    private float turbotimer;
+    private int turbocount;
+    public Text turboText;
+    private bool barrelroll;
+    private int rotation;
+
 
     void Start()
     {
         health = 100;
         SetCountText();
         winText.text = "";
+        turbo = false;
+        barrelroll = false;
+        rotation = 0;
+        turbotimer = 0;
+        turbocount = 3;
+        SetTurboText();
     }
 
-    void Update() {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Space)) shoot();
+        if (Input.GetKeyDown(KeyCode.N)) turboacc();
+        if (Input.GetKeyDown(KeyCode.B)) barrelroll = true;
+
+        if(turbo)
+        {
+            turbotimer += Time.deltaTime;
+            if(turbotimer >= 0.5)
+            {
+                speed_constant = 3;
+                turbotimer = 0;
+                turbo = false;
+            }
+        }
+
+        if(barrelroll)
+        {
+            transform.localEulerAngles= new Vector3(0.0f, 0.0f, -rotation);
+            rotation = rotation + 5;
+            if (rotation == 360)
+            {
+                rotation = 0;
+                barrelroll = false;
+            }
+
+        }
+            
+
     }
 
     void FixedUpdate()
@@ -35,20 +76,14 @@ public class PlayerController : MonoBehaviour
         Vector3 constant = new Vector3(0.0f, 0.0f, 1);
 
         movementController(movement, constant);
-        RotationController();
     }
 
     void ClampPosition() //funcio per a fer que hi hagin limits invisibles a les vores
     {
-        /*Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        pos.x = Mathf.Clamp01(pos.x);
-        pos.y = Mathf.Clamp01(pos.y);
-        transform.position = Camera.main.ViewportToWorldPoint(pos);*/
-    }
-
-    void RotationController()
-    {
-        
+        //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        //pos.x = Mathf.Clamp01(pos.x);
+        //pos.y = Mathf.Clamp01(pos.y);
+       // transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
     void movementController(Vector3 movement, Vector3 constant)
@@ -60,11 +95,17 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-         if (other.gameObject.CompareTag("Enemy_Projectile")) {
-        
+        if (other.gameObject.CompareTag("Enemy_Projectile"))
+        {
+
             damage(10);
             Destroy(other.gameObject);
             SetCountText();
+        }
+
+        if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy"))
+        {
+            kill();
         }
     }
 
@@ -78,6 +119,11 @@ public class PlayerController : MonoBehaviour
         countText.text = "HP: " + health.ToString();
         if (health == 0) kill();
         
+    }
+
+    void SetTurboText()
+    {
+        turboText.text = "TURBOS: " + turbocount.ToString();
     }
 
     void kill() {
@@ -94,5 +140,17 @@ public class PlayerController : MonoBehaviour
         pps.tago = "Projectile";
         pps.movement = new Vector3(0.0f, 0.0f, 1.0f);
         pps.player = gameObject;
+    }
+
+    void turboacc()
+    {
+        if (turbocount > 0)
+        {
+            --turbocount;
+            turbo = true;
+            speed_constant = 20;
+            SetTurboText();
+        }
+
     }
 }

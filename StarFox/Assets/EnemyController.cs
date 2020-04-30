@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         //shotsPerSeconds = 1; impleemntacio dispars random
-         InvokeRepeating("shoot", 1.0f, 2.0f); // implementacio dispars cada x segons
+         InvokeRepeating("shoot", 1.0f, 1.0f); // implementacio dispars cada x segons
     }
 
     // Update is called once per frame
