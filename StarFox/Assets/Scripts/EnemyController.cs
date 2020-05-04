@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         //shotsPerSeconds = 1; impleemntacio dispars random
-         InvokeRepeating("shoot", 1.0f, 1.0f); // implementacio dispars cada x segons
+         InvokeRepeating("shoot", 1.0f, 0.5f); // implementacio dispars cada x segons
     }
 
     // Update is called once per frame
@@ -44,8 +44,10 @@ public class EnemyController : MonoBehaviour
             Quaternion q = Quaternion.identity;
             q.SetLookRotation(new Vector3(0, 1, 0), player.transform.position - transform.position);
             GameObject p = Instantiate(Projectile, transform.position + new Vector3(0.0f, 0.0f, 1.0f), q);
-            
+           
+
             ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
+       
             //p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
             p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             pps.speed = 40;

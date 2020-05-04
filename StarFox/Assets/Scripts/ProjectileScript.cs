@@ -21,9 +21,10 @@ public class ProjectileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.gameObject.tag = tago;
-        transform.localPosition += movement * speed * Time.deltaTime;
-         if ((player.transform.position - gameObject.transform.position).magnitude > 40) Destroy(gameObject);
+       
+            transform.gameObject.tag = tago;
+            transform.localPosition += movement * speed * Time.deltaTime;
+            if ((player.transform.position - gameObject.transform.position).magnitude > 40) Destroy(gameObject);
 
     }
 

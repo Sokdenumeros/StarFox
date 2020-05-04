@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource spin;
     public AudioSource nitro;
     public AudioSource notturbo;
+    private bool inmortal;
 
 
     void Start()
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         turbotimer = 0;
         turbocount = 3;
         SetTurboText();
+        inmortal = false;
     }
 
     void Update()
@@ -55,7 +57,20 @@ public class PlayerController : MonoBehaviour
             barrelroll = true;
         }
 
-        if(turbo)
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            inmortal = !inmortal;
+            if(inmortal == true)
+            {
+                countText.text = "GOD MODE";
+            }
+            else
+            {
+                SetCountText();
+            }
+        }
+
+        if (turbo)
         {
             turbotimer += Time.deltaTime;
             if(turbotimer >= 0.5)
@@ -112,20 +127,23 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy_Projectile"))
+        if (inmortal == false)
         {
-            if (barrelroll == false)
+            if (other.gameObject.CompareTag("Enemy_Projectile"))
             {
-                damage(10);
-                Destroy(other.gameObject);
-                SetCountText();
-                damaged.Play();
+                if (barrelroll == false)
+                {
+                    damage(10);
+                    Destroy(other.gameObject);
+                    SetCountText();
+                    damaged.Play();
+                }
             }
-        }
 
-        if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy"))
-        {
-            kill();
+            if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy"))
+            {
+                kill();
+            }
         }
     }
 
