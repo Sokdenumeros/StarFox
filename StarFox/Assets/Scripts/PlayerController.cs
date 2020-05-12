@@ -102,6 +102,8 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         float mhabs = moveHorizontal;
         if (mhabs < 0) mhabs = -mhabs;
+        //Vector3 rot = transform.localEulerAngles;
+        //transform.localEulerAngles += (new Vector3(-moveVertical * 20 - mhabs * 20, 0.0f, -moveHorizontal * 20) - rot)/2.0f;
         transform.localEulerAngles = new Vector3(-moveVertical * 20 -mhabs*20, 0.0f, -moveHorizontal * 20);
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
@@ -165,8 +167,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void kill() {
-        Destroy(gameObject);
-        winText.text = "YOU LOST";
+        if (!inmortal)
+        {
+            Destroy(gameObject);
+            winText.text = "YOU LOST";
+        }
     }
 
     void shoot() {
