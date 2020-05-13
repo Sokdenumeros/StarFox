@@ -20,18 +20,21 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.LookAt(player.transform);
-        distance = transform.position.z - player.transform.position.z;
-
-       /* float probability = Time.deltaTime * shotsPerSeconds;
-        if (Random.value < probability)
+        if (player != null)
         {
-            shoot();
-        } */ //implementacio dispars random
+            transform.LookAt(player.transform);
+            distance = transform.position.z - player.transform.position.z;
 
-        if (distance < 40)
-            IsAttacking = true;
+            /* float probability = Time.deltaTime * shotsPerSeconds;
+             if (Random.value < probability)
+             {
+                 shoot();
+             } */ //implementacio dispars random
+
+            if (distance < 40)
+                IsAttacking = true;
+            else IsAttacking = false;
+        }
         else IsAttacking = false;
 
         

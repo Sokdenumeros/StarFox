@@ -100,11 +100,9 @@ public class PlayerController : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        float mhabs = moveHorizontal;
-        if (mhabs < 0) mhabs = -mhabs;
-        //Vector3 rot = transform.localEulerAngles;
-        //transform.localEulerAngles += (new Vector3(-moveVertical * 20 - mhabs * 20, 0.0f, -moveHorizontal * 20) - rot)/2.0f;
-        transform.localEulerAngles = new Vector3(-moveVertical * 20 -mhabs*20, 0.0f, -moveHorizontal * 20);
+        transform.localEulerAngles = new Vector3(-moveVertical * 20 , moveHorizontal * 10, -moveHorizontal * 20);
+
+
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
         Vector3 constant = new Vector3(0.0f, 0.0f, 1);

@@ -24,7 +24,7 @@ public class ProjectileScript : MonoBehaviour
        
             transform.gameObject.tag = tago;
             transform.localPosition += movement * speed * Time.deltaTime;
-            if ((player.transform.position - gameObject.transform.position).magnitude > 300) Destroy(gameObject);
+            if (player != null && (player.transform.position - gameObject.transform.position).magnitude > 300) Destroy(gameObject);
 
     }
 
