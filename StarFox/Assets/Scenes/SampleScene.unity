@@ -1776,6 +1776,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VSDI
       objectReference: {fileID: 0}
+    - target: {fileID: 400108, guid: f6fd065a9ce027543b2ac4d56ac3a1b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.7553
+      objectReference: {fileID: 0}
+    - target: {fileID: 400108, guid: f6fd065a9ce027543b2ac4d56ac3a1b8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0377
+      objectReference: {fileID: 0}
     - target: {fileID: 400120, guid: f6fd065a9ce027543b2ac4d56ac3a1b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2623,6 +2631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b314ec3bcca4b4f89c096eda457929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 20
+  speed_constant: 2
+  player: {fileID: 516489627}
 --- !u!1001 &1519493658
 PrefabInstance:
   m_ObjectHideFlags: 0
