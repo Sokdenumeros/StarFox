@@ -31,10 +31,14 @@ public class PlayerController : MonoBehaviour
     public int speed_rel;
     private bool inmortal;
     private bool relantitzat;
-
+    private Vector3 movement;
+    private float moveHorizontal;
+    private float moveVertical;
+    public Rigidbody rb;
 
     void Start()
     {
+        movement = new Vector3(0, 0, 0);
         health = 100;
         SetCountText();
         winText.text = "";
@@ -59,7 +63,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            shotsound.Play();
             shoot();
         }
         if (Input.GetKeyDown(KeyCode.N))
@@ -119,19 +122,16 @@ public class PlayerController : MonoBehaviour
                 relantitzat = false;
             }
         }
-            
-
+        moveHorizontal = Input.GetAxis("Horizontal");
+        moveVertical = Input.GetAxis("Vertical");
+        movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
     }
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
         transform.localEulerAngles = new Vector3(-moveVertical * 20 , moveHorizontal * 10, -moveHorizontal * 20);
 
-
-
-        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
+    
         if ((dontcrossright && moveHorizontal > 0) || (dontcrossleft && moveHorizontal < 0)) movement = new Vector3(0.0f, moveVertical, 0.0f);
         else {
             dontcrossright = false;
@@ -147,9 +147,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        Vector3 constant = new Vector3(0.0f, 0.0f, 1);
-
-        movementController(movement, constant);
+        movementController();
     }
 
     void ClampPosition() //funcio per a fer que hi hagin limits invisibles a les vores
@@ -160,10 +158,9 @@ public class PlayerController : MonoBehaviour
        // transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
-    void movementController(Vector3 movement, Vector3 constant)
+    void movementController()
     {
-        transform.localPosition += movement * speed * Time.deltaTime;
-        transform.localPosition += constant * speed_constant * Time.deltaTime;
+        rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
         ClampPosition();
         
     }
@@ -228,6 +225,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void shoot() {
+        shotsound.Play();
         GameObject p = Instantiate(Projectile, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
         p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);

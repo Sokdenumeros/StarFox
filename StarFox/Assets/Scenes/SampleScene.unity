@@ -472,6 +472,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7ad33db5e0c9c1e4c99256baae013b60, type: 2}
+    - target: {fileID: 64119596843337590, guid: 9288bdcd172a05947ba0eb1fde7f0346,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9288bdcd172a05947ba0eb1fde7f0346, type: 3}
 --- !u!1 &260731061
@@ -1142,6 +1147,7 @@ MonoBehaviour:
   nitro: {fileID: 121102545}
   notturbo: {fileID: 260731062}
   speed_rel: 3
+  rb: {fileID: 516489629}
 --- !u!54 &516489629
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1153,8 +1159,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1838,6 +1844,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fdaa2a7213f3cf141b382f81653d4162, type: 2}
+    - target: {fileID: 64119596843337590, guid: 9288bdcd172a05947ba0eb1fde7f0346,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9288bdcd172a05947ba0eb1fde7f0346, type: 3}
 --- !u!1 &798567802
@@ -2046,7 +2057,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 516489627}
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 4411524355151493852, guid: aed2912206bf26444a147eebcbe68b9d,
+    type: 3}
 --- !u!1 &879960133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2250,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e2fa279f5528abd4e9c9cab044813295, type: 2}
+    - target: {fileID: 64119596843337590, guid: 9288bdcd172a05947ba0eb1fde7f0346,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9288bdcd172a05947ba0eb1fde7f0346, type: 3}
 --- !u!1001 &914356988
@@ -2304,6 +2321,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e9becee2a9243d64fa311b81b13ca98f, type: 2}
+    - target: {fileID: 64119596843337590, guid: 9288bdcd172a05947ba0eb1fde7f0346,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9288bdcd172a05947ba0eb1fde7f0346, type: 3}
 --- !u!1 &963194225
