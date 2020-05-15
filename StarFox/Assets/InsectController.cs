@@ -12,14 +12,14 @@ public class InsectController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        estatic = true;
+        estatic = false;
         temps = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+        if (player.transform.position.x == 50) estatic = true;
         if (estatic)
         {
             temps += Time.deltaTime;
