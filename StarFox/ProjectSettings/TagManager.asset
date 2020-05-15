@@ -9,6 +9,12 @@ TagManager:
   - Enemy_Projectile
   - Projectile
   - Enemymover
+  - CameraFollow
+  - RightL
+  - TopL
+  - BotL
+  - LeftL
+  - Enemy_Laser
   layers:
   - Default
   - TransparentFX

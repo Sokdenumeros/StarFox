@@ -7,12 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float speed_constant;
+    private bool dontcrossright;
+    private bool dontcrosstop;
+    private bool dontcrossbot;
+    private bool dontcrossleft;
     public Text countText;
     public Text winText;
     public GameObject Projectile;
     private int health;
     private bool turbo;
     private float turbotimer;
+    private float tempsrel;
     private int turbocount;
     public Text turboText;
     private bool barrelroll;
@@ -23,7 +28,9 @@ public class PlayerController : MonoBehaviour
     public AudioSource spin;
     public AudioSource nitro;
     public AudioSource notturbo;
+    public int speed_rel;
     private bool inmortal;
+    private bool relantitzat;
 
 
     void Start()
@@ -36,8 +43,16 @@ public class PlayerController : MonoBehaviour
         rotation = 0;
         turbotimer = 0;
         turbocount = 3;
+        tempsrel = 0;
         SetTurboText();
         inmortal = false;
+        relantitzat = false;
+        dontcrossright = false;
+        dontcrosstop = false;
+        dontcrossbot = false;
+        dontcrossleft = false;
+
+
     }
 
     void Update()
@@ -92,6 +107,18 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        if(relantitzat)
+        {
+            tempsrel += Time.deltaTime;
+            speed = speed_rel;
+            if (tempsrel >= 5)
+            {
+                tempsrel = 0;
+                speed = 15;
+                relantitzat = false;
+            }
+        }
             
 
     }
@@ -105,6 +132,21 @@ public class PlayerController : MonoBehaviour
 
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
+        if ((dontcrossright && moveHorizontal > 0) || (dontcrossleft && moveHorizontal < 0)) movement = new Vector3(0.0f, moveVertical, 0.0f);
+        else {
+            dontcrossright = false;
+            dontcrossleft = false;
+        }
+
+        if ((dontcrosstop && moveVertical > 0) || (dontcrossbot && moveVertical < 0)) movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
+        else
+        {
+            dontcrosstop = false;
+            dontcrossbot = false;
+        }
+
+
+
         Vector3 constant = new Vector3(0.0f, 0.0f, 1);
 
         movementController(movement, constant);
@@ -123,28 +165,41 @@ public class PlayerController : MonoBehaviour
         transform.localPosition += movement * speed * Time.deltaTime;
         transform.localPosition += constant * speed_constant * Time.deltaTime;
         ClampPosition();
+        
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (inmortal == false)
-        {
-            if (other.gameObject.CompareTag("Enemy_Projectile"))
-            {
-                if (barrelroll == false)
-                {
-                    damage(10);
-                    Destroy(other.gameObject);
-                    SetCountText();
-                    damaged.Play();
-                }
-            }
 
-            if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Enemymover"))
+
+        if (other.gameObject.CompareTag("Enemy_Projectile"))
+        {
+            if (barrelroll == false)
             {
-                kill();
+                damage(10);
+                Destroy(other.gameObject);
+                SetCountText();
+                damaged.Play();
             }
         }
+
+        else if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Enemymover"))
+        {
+            kill();
+        }
+
+        if (other.gameObject.CompareTag("Enemy_Laser")) relantitzat = true;
+
+        if (other.gameObject.CompareTag("RightL")) dontcrossright = true;
+        else if (other.gameObject.CompareTag("LeftL")) dontcrossleft = true;
+
+
+        if (other.gameObject.CompareTag("TopL")) dontcrosstop = true;
+        else if (other.gameObject.CompareTag("BotL")) dontcrossbot = true;
+
+        
+
+
     }
 
     void damage(int damage) {
