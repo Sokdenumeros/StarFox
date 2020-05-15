@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy"))
+            if (other.gameObject.CompareTag("Pilar") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Enemymover"))
             {
                 kill();
             }
