@@ -15,14 +15,14 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (player != null)
         {
             Vector3 vect = player.transform.position + offset - transform.position;
             float spd = vect.magnitude;
             spd *= spd*spd;
-            transform.localPosition += Vector3.Normalize(vect)*vect.magnitude;
+            transform.localPosition += Vector3.Normalize(vect)*spd*Time.deltaTime;
         }
     }
 }
