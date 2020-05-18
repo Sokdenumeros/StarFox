@@ -15,17 +15,18 @@ public class PlayerController : MonoBehaviour
     public Text countText;
     public Text winText;
     public GameObject Projectile;
+    public GameObject Projectile_power;
     public GameObject insect;
     public GameObject camera;
     private int health;
     private bool turbo;
     private bool hackfast;
-    private bool visionulafirst;
     private bool controlsinvertits;
     private float turbotimer;
     private float tempsrel;
     private int turbocount;
     public Text turboText;
+    public Text powerText;
     private bool barrelroll;
     private int rotation;
     public AudioSource shotsound;
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
     private float moveVertical;
     private float tempsvisionula;
     private bool esquerra;
+    private int countpower;
+    public int greentopowerup;
     public Rigidbody rb;
 
     void Start()
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(0, 0, 0);
         health = 100;
         SetCountText();
+        SetPowerText();
         winText.text = "";
         turbo = false;
         barrelroll = false;
@@ -69,8 +73,8 @@ public class PlayerController : MonoBehaviour
         visionula = false;
         tempsinvertit = 0;
         tempsvisionula = 0;
-        visionulafirst = true;
         esquerra = true;
+        countpower = 0;
 
 
     }
@@ -79,7 +83,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            shoot();
+            if (countpower == greentopowerup)
+            {
+                shoot(Projectile_power, "Projectile_power", false, 20);
+                countpower = 0;
+                SetPowerText();
+            }
+            else shoot(Projectile, "Projectile", true, 100);
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -175,11 +185,6 @@ public class PlayerController : MonoBehaviour
 
         if (visionula)
         {
-            if(visionulafirst)
-            { 
-                offset = camera.transform.position - transform.position;
-                visionulafirst = false;
-            }
             
             tempsvisionula += Time.deltaTime;
             Vector3 vect = transform.position + offset - camera.transform.position;
@@ -204,7 +209,6 @@ public class PlayerController : MonoBehaviour
                 insect.transform.localPosition = new Vector3(-10, -10, -10);
                 tempsvisionula = 0;
                 visionula = false;
-                visionulafirst = true;
             }
         }
     }
@@ -273,6 +277,14 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("blueproj")) visionula = true;
 
+        if (other.gameObject.CompareTag("greenproj"))
+        {
+            if (countpower < greentopowerup)
+            {
+                ++countpower;
+                SetPowerText();
+            }
+        }
         if (other.gameObject.CompareTag("RightL")) dontcrossright = true;
         else if (other.gameObject.CompareTag("LeftL")) dontcrossleft = true;
 
@@ -297,6 +309,12 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    void SetPowerText()
+    {
+        if (countpower == greentopowerup) powerText.text = "SUPER SHOT READY";
+        else powerText.text = "Power to super shot: " + countpower.ToString() + "/" + greentopowerup;
+    }
+
     void SetTurboText()
     {
         turboText.text = "TURBOS: " + turbocount.ToString();
@@ -310,14 +328,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void shoot() {
+    void shoot(GameObject Project, string tag, bool escalat, int vel) {
         shotsound.Play();
-        GameObject p = Instantiate(Projectile, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
+        GameObject p = Instantiate(Project, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
         p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-        p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
-        pps.speed = 100;
-        pps.tago = "Projectile";
+        if(escalat) p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
+        else p.transform.localScale = new Vector3(5, 5, 5);
+        pps.speed = vel;
+        pps.tago = tag;
         pps.movement = new Vector3(0.0f, 0.0f, 1.0f);
         pps.player = gameObject;
         pps.enemykill = enemykill;

@@ -19,6 +19,8 @@ TagManager:
   - blueproj
   - greenproj
   - purpleproj
+  - Projectile_power
+  - Boss
   layers:
   - Default
   - TransparentFX
