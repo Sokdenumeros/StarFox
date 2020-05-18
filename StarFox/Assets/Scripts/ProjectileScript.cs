@@ -44,6 +44,25 @@ public class ProjectileScript : MonoBehaviour
             }
         }
 
+        else if(tago == "purpleproj" || tago == "blueproj")
+        {
+            Vector3 targetDir = player.transform.position - transform.position;
+            float step = speed * Time.deltaTime;
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+            transform.rotation = Quaternion.LookRotation(newDir);
+
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+            temps += Time.deltaTime;
+
+            if (temps >= 5)
+            {
+                temps = 0;
+                Destroy(gameObject);
+            }
+
+        }
+
         else {
 
             transform.gameObject.tag = tago;

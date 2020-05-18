@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    private Vector3 offset;
     public float speed_constant;
     private bool dontcrossright;
     private bool dontcrosstop;
@@ -14,9 +15,13 @@ public class PlayerController : MonoBehaviour
     public Text countText;
     public Text winText;
     public GameObject Projectile;
+    public GameObject insect;
+    public GameObject camera;
     private int health;
     private bool turbo;
     private bool hackfast;
+    private bool visionulafirst;
+    private bool controlsinvertits;
     private float turbotimer;
     private float tempsrel;
     private int turbocount;
@@ -32,9 +37,13 @@ public class PlayerController : MonoBehaviour
     public int speed_rel;
     private bool inmortal;
     private bool relantitzat;
+    private float tempsinvertit;
+    private bool visionula;
     private Vector3 movement;
     private float moveHorizontal;
     private float moveVertical;
+    private float tempsvisionula;
+    private bool esquerra;
     public Rigidbody rb;
 
     void Start()
@@ -56,6 +65,12 @@ public class PlayerController : MonoBehaviour
         dontcrosstop = false;
         dontcrossbot = false;
         dontcrossleft = false;
+        controlsinvertits = false;
+        visionula = false;
+        tempsinvertit = 0;
+        tempsvisionula = 0;
+        visionulafirst = true;
+        esquerra = true;
 
 
     }
@@ -137,9 +152,61 @@ public class PlayerController : MonoBehaviour
                 relantitzat = false;
             }
         }
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
-        movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+
+        if (controlsinvertits)
+        {
+            tempsinvertit += Time.deltaTime;
+            moveVertical = Input.GetAxis("Horizontal");
+            moveHorizontal = Input.GetAxis("Vertical");
+            movement = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0.0f);
+            if (tempsinvertit >= 5)
+            {
+                tempsinvertit = 0;
+                controlsinvertits = false;
+            }
+        }
+
+        else
+        {
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
+            movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+        }
+
+        if (visionula)
+        {
+            if(visionulafirst)
+            { 
+                offset = camera.transform.position - transform.position;
+                visionulafirst = false;
+            }
+            
+            tempsvisionula += Time.deltaTime;
+            Vector3 vect = transform.position + offset - camera.transform.position;
+            float spd = vect.magnitude;
+            spd *= spd * spd;
+            //insect.transform.localPosition += Vector3.Normalize(vect) * spd * Time.deltaTime;
+            // insect.transform.localPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z - 4);
+
+            insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
+            if (esquerra)
+            {
+                camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = false;
+            }
+            else if (!esquerra)
+            {
+                camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = true;
+            }
+            if (tempsvisionula >= 5)
+            {
+                insect.transform.localPosition = new Vector3(-10, -10, -10);
+                tempsvisionula = 0;
+                visionula = false;
+                visionulafirst = true;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -201,6 +268,10 @@ public class PlayerController : MonoBehaviour
         }
 
         if (other.gameObject.CompareTag("Enemy_Laser")) relantitzat = true;
+
+        if (other.gameObject.CompareTag("purpleproj")) controlsinvertits = true;
+
+        if(other.gameObject.CompareTag("blueproj")) visionula = true;
 
         if (other.gameObject.CompareTag("RightL")) dontcrossright = true;
         else if (other.gameObject.CompareTag("LeftL")) dontcrossleft = true;

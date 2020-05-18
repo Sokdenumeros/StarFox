@@ -1139,6 +1139,8 @@ MonoBehaviour:
   winText: {fileID: 366885157}
   Projectile: {fileID: 4411524355151493852, guid: aed2912206bf26444a147eebcbe68b9d,
     type: 3}
+  insect: {fileID: 1298325385}
+  camera: {fileID: 1731161836}
   turboText: {fileID: 1576355454}
   shotsound: {fileID: 271850433}
   enemykill: {fileID: 1949886597}
@@ -4007,7 +4009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5be2c6dc7d0cd11418701026bf971b37, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5be2c6dc7d0cd11418701026bf971b37, type: 3}
       propertyPath: m_LocalScale.y
@@ -4015,7 +4017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5be2c6dc7d0cd11418701026bf971b37, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 5be2c6dc7d0cd11418701026bf971b37, type: 3}
       propertyPath: m_Controller

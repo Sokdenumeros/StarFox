@@ -41,19 +41,19 @@ public class BossScript : MonoBehaviour
             transform.localPosition += position * 10 * Time.deltaTime;
 
 
-            if (temps >= 5)
+            if (temps >= 7)
             {
 
-                if (tipusprojectil <= 1) creaProjectil(Projectile3);
-                else if (tipusprojectil > 1 && tipusprojectil <= 2) creaProjectil(Projectile2);
-                else if (tipusprojectil > 2 && tipusprojectil <= 3) creaProjectil(Projectile1);
+                if (tipusprojectil <= 1) creaProjectil(Projectile1, "blueproj", 40);
+                else if (tipusprojectil > 1 && tipusprojectil <= 2) creaProjectil(Projectile2, "greenproj", 20);
+                else if (tipusprojectil > 2 && tipusprojectil <= 3) creaProjectil(Projectile3, "purpleproj", 40);
               
                 temps = 0;
             }
         }
     }
 
-    void creaProjectil(GameObject Projectile)
+    void creaProjectil(GameObject Projectile, string tag, int sp)
     {
         Quaternion q = Quaternion.identity;
         q.SetLookRotation(new Vector3(0, 1, 0), player.transform.position - transform.position);
@@ -64,9 +64,9 @@ public class BossScript : MonoBehaviour
 
         //p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
 
-        pps.speed = 10;
+        pps.speed = sp;
         pps.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized;
-        pps.tago = "Enemy_Laser";
+        pps.tago = tag;
         pps.player = player;
         pps.enemy = gameObject;
     }

@@ -15,6 +15,10 @@ TagManager:
   - BotL
   - LeftL
   - Enemy_Laser
+  - FxTemporaire
+  - blueproj
+  - greenproj
+  - purpleproj
   layers:
   - Default
   - TransparentFX
