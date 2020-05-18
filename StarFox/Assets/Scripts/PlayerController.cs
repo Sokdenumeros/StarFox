@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private int health;
     private bool turbo;
     private bool hackfast;
+    private float time;
     private bool controlsinvertits;
     private float turbotimer;
     private float tempsrel;
@@ -75,12 +76,15 @@ public class PlayerController : MonoBehaviour
         tempsvisionula = 0;
         esquerra = true;
         countpower = 0;
+        time = 0;
 
 
     }
 
     void Update()
     {
+
+       
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (countpower == greentopowerup)
@@ -97,8 +101,13 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            spin.Play();
-            barrelroll = true;
+            
+            if (time == 0)
+            {
+                barrelroll = true;
+                spin.Play();
+                time += Time.deltaTime;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F) && inmortal)
@@ -127,6 +136,11 @@ public class PlayerController : MonoBehaviour
                 SetCountText();
             }
         }
+
+        
+        
+           if(time > 0) time += Time.deltaTime;
+           if (time >= 10) time = 0;
 
         if (turbo)
         {
@@ -246,7 +260,11 @@ public class PlayerController : MonoBehaviour
 
     void movementController()
     {
-        rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
+        if(barrelroll)
+        {
+            rb.velocity = (movement * 20) + (new Vector3(0.0f, 0.0f, speed_constant));
+        }
+        else rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
         ClampPosition();
         
     }
