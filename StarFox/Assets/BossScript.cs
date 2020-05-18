@@ -35,7 +35,7 @@ public class BossScript : MonoBehaviour
             }
 
 
-            Vector3 position = new Vector3(Random.Range(0,1), Random.Range(0, 1), 0);
+            Vector3 position = new Vector3(Random.Range(-1.0f,1.1f), Random.Range(-1.0f, 1.1f), 0);
             transform.localPosition += new Vector3(0,0,1) * 3 * Time.deltaTime;
 
             transform.localPosition += position * 10 * Time.deltaTime;
@@ -64,7 +64,7 @@ public class BossScript : MonoBehaviour
 
         //p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
 
-        pps.speed = 40;
+        pps.speed = 10;
         pps.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized;
         pps.tago = "Enemy_Laser";
         pps.player = player;
