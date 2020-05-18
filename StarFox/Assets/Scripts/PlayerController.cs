@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool dontcrossleft;
     public Text countText;
     public Text winText;
+    public Text barrelText;
     public GameObject Projectile;
     public GameObject Projectile_power;
     public GameObject insect;
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         turbocount = 3;
         tempsrel = 0;
         SetTurboText();
+        SetBarrelText();
         inmortal = false;
         relantitzat = false;
         dontcrossright = false;
@@ -137,10 +139,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
-        
-           if(time > 0) time += Time.deltaTime;
-           if (time >= 10) time = 0;
+
+           
+           if (time > 0) time += Time.deltaTime;
+           if (time >= 5) time = 0;
+           SetBarrelText();
 
         if (turbo)
         {
@@ -325,6 +328,14 @@ public class PlayerController : MonoBehaviour
         countText.text = "HP: " + health.ToString();
         if (health == 0) kill();
         
+    }
+
+    void SetBarrelText()
+    {
+        if (time == 0) barrelText.text = "BarrelRoll READY";
+        else barrelText.text = time.ToString() + "/5 to have BarrelRoll";
+        
+
     }
 
     void SetPowerText()
