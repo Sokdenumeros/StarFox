@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Projectile;
     private int health;
     private bool turbo;
+    private bool hackfast;
     private float turbotimer;
     private float tempsrel;
     private int turbocount;
@@ -73,6 +74,20 @@ public class PlayerController : MonoBehaviour
         {
             spin.Play();
             barrelroll = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F) && inmortal)
+        {
+            if (hackfast == false)
+            {
+                speed_constant = 30;
+                hackfast = true;
+            }
+            else
+            {
+                speed_constant = 3;
+                hackfast = false;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.G))

@@ -19,7 +19,7 @@ public class InsectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.x == 50) estatic = true;
+        if (player.transform.position.z == 50) estatic = true;
         if (estatic)
         {
             temps += Time.deltaTime;
