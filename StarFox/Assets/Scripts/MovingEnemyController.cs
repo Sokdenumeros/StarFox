@@ -13,6 +13,7 @@ public class MovingEnemyController : MonoBehaviour
     private Vector3 movement_constant;
     private Vector3 movement;
     public GameObject player;
+    public float distdisp;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,30 +26,32 @@ public class MovingEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(kamikaze)
+        if (player.transform.position.z >= distdisp)
         {
-            transform.localPosition += movement_constant * speedkamikaze * Time.deltaTime;
-        }
+            if (kamikaze)
+            {
+                transform.localPosition += movement_constant * speedkamikaze * Time.deltaTime;
+            }
 
 
-        else if (count > videsenemic)
-        {
-            if (transform.localPosition.x > player.transform.position.x) movement = new Vector3(-1, 0, 0);
-            else if (transform.localPosition.x < player.transform.position.x) movement = new Vector3(1, 0, 0);
-           kamikaze = true;
-           movement_constant = new Vector3(0, 0, -1);
-            
-            transform.localPosition += movement * speed * Time.deltaTime;
-            transform.localPosition += movement_constant * speed_constant * Time.deltaTime;
+            else if (count > videsenemic)
+            {
+                if (transform.localPosition.x > player.transform.position.x) movement = new Vector3(-1, 0, 0);
+                else if (transform.localPosition.x < player.transform.position.x) movement = new Vector3(1, 0, 0);
+                kamikaze = true;
+                movement_constant = new Vector3(0, 0, -1);
 
-        }
-        else
-        {
-            transform.localPosition += movement * speed * Time.deltaTime;
-            if (transform.localPosition.x > player.transform.position.x + 20) movement = new Vector3(-1, 0, 0);
-            else if (transform.localPosition.x < player.transform.position.x - 20) movement = new Vector3(1, 0, 0);
-            transform.localPosition += movement_constant * speed_constant * Time.deltaTime;
+                transform.localPosition += movement * speed * Time.deltaTime;
+                transform.localPosition += movement_constant * speed_constant * Time.deltaTime;
+
+            }
+            else
+            {
+                transform.localPosition += movement * speed * Time.deltaTime;
+                if (transform.localPosition.x > player.transform.position.x + 20) movement = new Vector3(-1, 0, 0);
+                else if (transform.localPosition.x < player.transform.position.x - 20) movement = new Vector3(1, 0, 0);
+                transform.localPosition += movement_constant * speed_constant * Time.deltaTime;
+            }
         }
     }
 

@@ -7,14 +7,16 @@ public class EnemyController : MonoBehaviour
 
     public GameObject Projectile;
     public GameObject player;
-    public bool IsAttacking;
-    public float distance;
+    private bool IsAttacking;
+    private float distance;
+    public float distdis;
     //public float shotsPerSeconds; impleemntacio dispars random
     // Start is called before the first frame update
     void Start()
     {
         //shotsPerSeconds = 1; impleemntacio dispars random
          InvokeRepeating("shoot", 1.0f, 0.5f); // implementacio dispars cada x segons
+        IsAttacking = false;
     }
 
     // Update is called once per frame
@@ -23,7 +25,17 @@ public class EnemyController : MonoBehaviour
         if (player != null)
         {
             transform.LookAt(player.transform);
-            distance = transform.position.z - player.transform.position.z;
+            
+                distance = transform.position.z - player.transform.position.z;
+            if (distance <= distdis)
+            {
+                IsAttacking = true;
+            }
+            else IsAttacking = false;
+            }
+        
+            
+            
 
             /* float probability = Time.deltaTime * shotsPerSeconds;
              if (Random.value < probability)
@@ -31,11 +43,7 @@ public class EnemyController : MonoBehaviour
                  shoot();
              } */ //implementacio dispars random
 
-            if (distance < 40)
-                IsAttacking = true;
-            else IsAttacking = false;
-        }
-        else IsAttacking = false;
+      
 
         
     }
@@ -52,7 +60,7 @@ public class EnemyController : MonoBehaviour
             ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
        
             //p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-            p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            p.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps.speed = 40;
             pps.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y,  player.transform.position.z - transform.position.z).normalized;
             pps.tago = "Enemy_Projectile";
