@@ -7,14 +7,16 @@ public class FloorEnemyController : MonoBehaviour
 
     public GameObject Projectile;
     public GameObject player;
-    public bool IsAttacking;
-    public float distance;
+    private bool IsAttacking;
+    private float distance;
+    public float distdis;
     //public float shotsPerSeconds; impleemntacio dispars random
     // Start is called before the first frame update
     void Start()
     {
         //shotsPerSeconds = 1; impleemntacio dispars random
         InvokeRepeating("shoot", 1.0f, 3.0f); // implementacio dispars cada x segons
+        IsAttacking = false;
     }
 
     // Update is called once per frame
@@ -30,7 +32,7 @@ public class FloorEnemyController : MonoBehaviour
              shoot();
          } */ //implementacio dispars random
 
-        if (distance < 100)
+        if (distance <= distdis)
             IsAttacking = true;
         else IsAttacking = false;
 
@@ -55,35 +57,35 @@ public class FloorEnemyController : MonoBehaviour
             ProjectileScript pps3 = (ProjectileScript)p3.GetComponent(typeof(ProjectileScript));
             ProjectileScript pps4 = (ProjectileScript)p4.GetComponent(typeof(ProjectileScript));
             //p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-            p.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            p.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps.speed = 40;
             pps.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized;
             pps.tago = "Enemy_Projectile";
             pps.player = player;
             pps.enemy = gameObject;
 
-            p1.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            p1.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps1.speed = 40;
             pps1.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y + 3, player.transform.position.z - transform.position.z).normalized;
             pps1.tago = "Enemy_Projectile";
             pps1.player = player;
             pps1.enemy = gameObject;
 
-            p2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            p2.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps2.speed = 40;
             pps2.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y - 3, player.transform.position.z - transform.position.z).normalized;
             pps2.tago = "Enemy_Projectile";
             pps2.player = player;
             pps2.enemy = gameObject;
 
-            p3.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            p3.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps3.speed = 40;
             pps3.movement = new Vector3(player.transform.position.x - transform.position.x + 3, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized;
             pps3.tago = "Enemy_Projectile";
             pps3.player = player;
             pps3.enemy = gameObject;
 
-            p4.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            p4.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps4.speed = 40;
             pps4.movement = new Vector3(player.transform.position.x - transform.position.x - 3, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized;
             pps4.tago = "Enemy_Projectile";
