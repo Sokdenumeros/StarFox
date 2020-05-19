@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    private Vector3 offset;
     public float speed_constant;
     private bool dontcrossright;
     private bool dontcrosstop;
@@ -13,14 +14,21 @@ public class PlayerController : MonoBehaviour
     private bool dontcrossleft;
     public Text countText;
     public Text winText;
+    public Text barrelText;
     public GameObject Projectile;
+    public GameObject Projectile_power;
+    public GameObject insect;
+    public GameObject camera;
     private int health;
     private bool turbo;
     private bool hackfast;
+    private float time;
+    private bool controlsinvertits;
     private float turbotimer;
     private float tempsrel;
     private int turbocount;
     public Text turboText;
+    public Text powerText;
     private bool barrelroll;
     private int rotation;
     public AudioSource shotsound;
@@ -32,9 +40,15 @@ public class PlayerController : MonoBehaviour
     public int speed_rel;
     private bool inmortal;
     private bool relantitzat;
+    private float tempsinvertit;
+    private bool visionula;
     private Vector3 movement;
     private float moveHorizontal;
     private float moveVertical;
+    private float tempsvisionula;
+    private bool esquerra;
+    private int countpower;
+    public int greentopowerup;
     public Rigidbody rb;
 
     void Start()
@@ -42,6 +56,7 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(0, 0, 0);
         health = 100;
         SetCountText();
+        SetPowerText();
         winText.text = "";
         turbo = false;
         barrelroll = false;
@@ -50,21 +65,37 @@ public class PlayerController : MonoBehaviour
         turbocount = 3;
         tempsrel = 0;
         SetTurboText();
+        SetBarrelText();
         inmortal = false;
         relantitzat = false;
         dontcrossright = false;
         dontcrosstop = false;
         dontcrossbot = false;
         dontcrossleft = false;
+        controlsinvertits = false;
+        visionula = false;
+        tempsinvertit = 0;
+        tempsvisionula = 0;
+        esquerra = true;
+        countpower = 0;
+        time = 0;
 
 
     }
 
     void Update()
     {
+
+       
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            shoot();
+            if (countpower == greentopowerup)
+            {
+                shoot(Projectile_power, "Projectile_power", false, 20);
+                countpower = 0;
+                SetPowerText();
+            }
+            else shoot(Projectile, "Projectile", true, 100);
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -72,8 +103,13 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            spin.Play();
-            barrelroll = true;
+            
+            if (time == 0)
+            {
+                barrelroll = true;
+                spin.Play();
+                time += Time.deltaTime;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F) && inmortal)
@@ -102,6 +138,12 @@ public class PlayerController : MonoBehaviour
                 SetCountText();
             }
         }
+
+
+           
+           if (time > 0) time += Time.deltaTime;
+           if (time >= 5) time = 0;
+           SetBarrelText();
 
         if (turbo)
         {
@@ -137,9 +179,55 @@ public class PlayerController : MonoBehaviour
                 relantitzat = false;
             }
         }
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
-        movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+
+        if (controlsinvertits)
+        {
+            tempsinvertit += Time.deltaTime;
+            moveVertical = Input.GetAxis("Horizontal");
+            moveHorizontal = Input.GetAxis("Vertical");
+            movement = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0.0f);
+            if (tempsinvertit >= 5)
+            {
+                tempsinvertit = 0;
+                controlsinvertits = false;
+            }
+        }
+
+        else
+        {
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
+            movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+        }
+
+        if (visionula)
+        {
+            
+            tempsvisionula += Time.deltaTime;
+            Vector3 vect = transform.position + offset - camera.transform.position;
+            float spd = vect.magnitude;
+            spd *= spd * spd;
+            //insect.transform.localPosition += Vector3.Normalize(vect) * spd * Time.deltaTime;
+            // insect.transform.localPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z - 4);
+
+            insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
+            if (esquerra)
+            {
+                camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = false;
+            }
+            else if (!esquerra)
+            {
+                camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = true;
+            }
+            if (tempsvisionula >= 5)
+            {
+                insect.transform.localPosition = new Vector3(-10, -10, -10);
+                tempsvisionula = 0;
+                visionula = false;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -175,7 +263,11 @@ public class PlayerController : MonoBehaviour
 
     void movementController()
     {
-        rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
+        if(barrelroll)
+        {
+            rb.velocity = (movement * 20) + (new Vector3(0.0f, 0.0f, speed_constant));
+        }
+        else rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
         ClampPosition();
         
     }
@@ -202,6 +294,18 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy_Laser")) relantitzat = true;
 
+        if (other.gameObject.CompareTag("purpleproj")) controlsinvertits = true;
+
+        if(other.gameObject.CompareTag("blueproj")) visionula = true;
+
+        if (other.gameObject.CompareTag("greenproj"))
+        {
+            if (countpower < greentopowerup)
+            {
+                ++countpower;
+                SetPowerText();
+            }
+        }
         if (other.gameObject.CompareTag("RightL")) dontcrossright = true;
         else if (other.gameObject.CompareTag("LeftL")) dontcrossleft = true;
 
@@ -226,6 +330,20 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    void SetBarrelText()
+    {
+        if (time == 0) barrelText.text = "BarrelRoll READY";
+        else barrelText.text = time.ToString() + "/5 to have BarrelRoll";
+        
+
+    }
+
+    void SetPowerText()
+    {
+        if (countpower == greentopowerup) powerText.text = "SUPER SHOT READY";
+        else powerText.text = "Power to super shot: " + countpower.ToString() + "/" + greentopowerup;
+    }
+
     void SetTurboText()
     {
         turboText.text = "TURBOS: " + turbocount.ToString();
@@ -239,14 +357,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void shoot() {
+    void shoot(GameObject Project, string tag, bool escalat, int vel) {
         shotsound.Play();
-        GameObject p = Instantiate(Projectile, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
+        GameObject p = Instantiate(Project, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
         p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-        p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
-        pps.speed = 100;
-        pps.tago = "Projectile";
+        if(escalat) p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
+        else p.transform.localScale = new Vector3(5, 5, 5);
+        pps.speed = vel;
+        pps.tago = tag;
         pps.movement = new Vector3(0.0f, 0.0f, 1.0f);
         pps.player = gameObject;
         pps.enemykill = enemykill;
