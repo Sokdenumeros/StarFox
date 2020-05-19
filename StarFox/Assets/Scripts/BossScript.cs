@@ -40,7 +40,7 @@ public class BossScript : MonoBehaviour
         tipusprojectil = Random.Range(0.0f, 3.1f);
         
 
-        if (player.transform.position.z >= 550)
+        if (player.transform.position.z >= 889.5529)
         {
 
             temps += Time.deltaTime;
@@ -53,7 +53,7 @@ public class BossScript : MonoBehaviour
 
 
             
-            transform.localPosition += new Vector3(0, 0, 1) * 3 * Time.deltaTime;
+            transform.localPosition += new Vector3(0, 0, 1) * 7 * Time.deltaTime;
 
             if (stopmov == false)
             {

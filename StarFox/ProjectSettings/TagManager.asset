@@ -21,6 +21,7 @@ TagManager:
   - purpleproj
   - Projectile_power
   - Boss
+  - nucleo
   layers:
   - Default
   - TransparentFX
