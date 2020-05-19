@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MenuManagerScript : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class MenuManagerScript : MonoBehaviour
 
     public void Quit() {
         Application.Quit();
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
     public void Credits() {
