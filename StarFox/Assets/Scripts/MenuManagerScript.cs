@@ -7,6 +7,8 @@ using System.Collections;
 
 public class MenuManagerScript : MonoBehaviour
 {
+    public GameObject menu;
+    public GameObject credits;
 
     public void loadScene1() {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
@@ -28,13 +30,19 @@ public class MenuManagerScript : MonoBehaviour
     }
 
     public void Credits() {
+        credits.SetActive(true);
+        menu.SetActive(false);
+    }
 
+    public void BackFromCredits() {
+        credits.SetActive(false);
+        menu.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        credits.SetActive(false);
     }
 
     // Update is called once per frame
