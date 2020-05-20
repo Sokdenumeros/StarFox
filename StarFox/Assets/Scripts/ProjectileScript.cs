@@ -55,7 +55,7 @@ public class ProjectileScript : MonoBehaviour
 
             temps += Time.deltaTime;
 
-            if (temps >= 5)
+            if (temps >= 8)
             {
                 temps = 0;
                 Destroy(gameObject);

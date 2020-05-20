@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class BossScript : MonoBehaviour
 {
     public GameObject player;
+    public GameObject Basic;
+    public GameObject Normal;
+    public GameObject movimente;
     public GameObject Projectile1;
     public GameObject Projectile2;
     public GameObject Projectile3;
@@ -21,6 +24,8 @@ public class BossScript : MonoBehaviour
     private bool prime;
     private bool quiet;
     private float tempsmov;
+    private int counte;
+    private float tempsenemics;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,8 @@ public class BossScript : MonoBehaviour
         prime = true;
         tempsmov = 0;
         quiet = false;
+        tempsenemics = 0;
+        counte = 0;
     }
 
     // Update is called once per frame
@@ -42,18 +49,28 @@ public class BossScript : MonoBehaviour
 
         if (player.transform.position.z >= 889.5529)
         {
+            tempsenemics += Time.deltaTime;
+            if (tempsenemics >= 5)
+            {
+                if (counte == 0) enemicbasic();
+                else if (counte == 1) enemicnormal();
+                else if (counte == 2) enemicmoviment();
+                ++counte;
+                if (counte == 3) counte = 0;
+                tempsenemics = 0;
+            }
 
             temps += Time.deltaTime;
             if (primer)
             {
                 SetBossText();
                 primer = false;
-                transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 50);
+                transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 150);
             }
 
 
             
-            transform.localPosition += new Vector3(0, 0, 1) * 7 * Time.deltaTime;
+            transform.localPosition += new Vector3(0, 0, 1) * 10 * Time.deltaTime;
 
             if (stopmov == false)
             {
@@ -144,9 +161,9 @@ public class BossScript : MonoBehaviour
         else if (stopmov)
         {
             tempsmov += Time.deltaTime;
-            if (prime) transform.localPosition += pos * 10 * Time.deltaTime;
-            else if (!prime) transform.localPosition -= pos * 10 * Time.deltaTime;
-            if (tempsmov >= 1)
+            if (prime) transform.localPosition += pos * 20 * Time.deltaTime;
+            else if (!prime) transform.localPosition -= pos * 20 * Time.deltaTime;
+            if (tempsmov >= 3)
             {
                 if (prime)
                 {
@@ -160,5 +177,65 @@ public class BossScript : MonoBehaviour
                 tempsmov = 0;
             }
         }
+    }
+
+    void enemicbasic()
+    {
+        Vector3 aux = transform.position;
+        Quaternion q = Quaternion.identity;
+        GameObject e = Instantiate(Basic, aux, q);
+        EnemyController ec = (EnemyController)e.GetComponent(typeof(EnemyController));
+        ec.player = player;
+
+        GameObject e1 = Instantiate(Basic, aux + new Vector3(6, 0, 0), q);
+        EnemyController ec1 = (EnemyController)e1.GetComponent(typeof(EnemyController));
+        ec1.player = player;
+
+      
+        GameObject e2 = Instantiate(Basic, aux - new Vector3(6, 0, 0), q);
+        EnemyController ec2 = (EnemyController)e2.GetComponent(typeof(EnemyController));
+        ec2.player = player;
+
+        GameObject e3 = Instantiate(Basic, aux + new Vector3(0, 6, 0), q);
+        EnemyController ec3 = (EnemyController)e3.GetComponent(typeof(EnemyController));
+        ec3.player = player;
+
+       
+        GameObject e4 = Instantiate(Basic, aux - new Vector3(0, 6, 0), q);
+        EnemyController ec4 = (EnemyController)e4.GetComponent(typeof(EnemyController));
+        ec4.player = player;
+
+
+    }
+    void enemicnormal() {
+
+
+        Vector3 aux1 = transform.position;
+        Quaternion qn = Quaternion.identity;
+        GameObject en = Instantiate(Normal, aux1, qn);
+        FloorEnemyController ecn = (FloorEnemyController)en.GetComponent(typeof(FloorEnemyController));
+        ecn.player = player;
+
+      
+        GameObject en1 = Instantiate(Normal, aux1 - new Vector3(0,  15, 0), qn);
+        FloorEnemyController ecn1 = (FloorEnemyController)en1.GetComponent(typeof(FloorEnemyController));
+        ecn1.player = player;
+        
+        GameObject en2 = Instantiate(Normal, aux1 + new Vector3(15, 0, 0), qn);
+        FloorEnemyController ecn2 = (FloorEnemyController)en2.GetComponent(typeof(FloorEnemyController));
+        ecn2.player = player;
+    }
+    void enemicmoviment() {
+
+        Vector3 aux2 = transform.position;
+        Quaternion qm = Quaternion.identity;
+        GameObject em = Instantiate(movimente, aux2, qm);
+        EnemyController ema = (EnemyController)em.GetComponent(typeof(EnemyController));
+        ema.player = player;
+
+        MovingEnemyController emb = (MovingEnemyController)em.GetComponent(typeof(MovingEnemyController));
+        emb.player = player;
+        emb.distdisp = player.transform.position.z + 40;
+
     }
 }

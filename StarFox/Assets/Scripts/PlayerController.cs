@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             if (countpower == greentopowerup)
             {
-                shoot(Projectile_power, "Projectile_power", false, 20);
+                shoot(Projectile_power, "Projectile_power", false, 27);
                 countpower = 0;
                 SetPowerText();
             }
@@ -116,14 +116,20 @@ public class PlayerController : MonoBehaviour
         {
             if (hackfast == false)
             {
-                speed_constant = 30;
+                speed_constant = 40;
                 hackfast = true;
             }
             else
             {
-                speed_constant = 3;
+                speed_constant = 10;
                 hackfast = false;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P) && inmortal)
+        {
+
+            countpower = greentopowerup;
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -148,9 +154,9 @@ public class PlayerController : MonoBehaviour
         if (turbo)
         {
             turbotimer += Time.deltaTime;
-            if(turbotimer >= 0.5)
+            if(turbotimer >= 1)
             {
-                speed_constant = 3;
+                speed_constant = 10;
                 turbotimer = 0;
                 turbo = false;
             }
@@ -378,7 +384,7 @@ public class PlayerController : MonoBehaviour
             nitro.Play();
             --turbocount;
             turbo = true;
-            speed_constant = 20;
+            speed_constant = 27;
             SetTurboText();
         }
 

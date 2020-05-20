@@ -32,7 +32,9 @@ public class FloorEnemyController : MonoBehaviour
              shoot();
          } */ //implementacio dispars random
 
-        if (distance <= distdis)
+        
+
+        if (distance <= distdis && distance >= 0)
             IsAttacking = true;
         else IsAttacking = false;
 

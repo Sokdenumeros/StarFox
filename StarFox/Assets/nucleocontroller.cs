@@ -8,6 +8,10 @@ public class nucleocontroller : MonoBehaviour
     private int count;
     public GameObject terreny;
     public GameObject Explosion;
+    public GameObject greenfire;
+    public GameObject purplefire;
+    public GameObject nau1;
+    public GameObject nau2;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,10 @@ public class nucleocontroller : MonoBehaviour
                 Quaternion q = Quaternion.identity;
                 Instantiate(Explosion, transform.position, q);
                 Destroy(terreny);
+                Destroy(nau1);
+                Destroy(nau2);
+                Destroy(greenfire);
+                Destroy(purplefire);
             }
         }
 

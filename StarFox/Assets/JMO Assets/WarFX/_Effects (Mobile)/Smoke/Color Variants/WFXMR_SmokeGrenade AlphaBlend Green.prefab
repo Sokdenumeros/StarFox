@@ -4636,7 +4636,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   serializedVersion: 6
-  lengthInSec: 5
+  lengthInSec: 7
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -9245,7 +9245,6 @@ MonoBehaviour:
   speed: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
-  Explosion: {fileID: 100010, guid: d609d5ebc845aca409f72e9c6a56dc60, type: 3}
   movement: {x: 0, y: 0, z: 0}
   tago: 
   enemykill: {fileID: 0}

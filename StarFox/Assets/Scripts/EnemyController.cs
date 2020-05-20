@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
             transform.LookAt(player.transform);
             
                 distance = transform.position.z - player.transform.position.z;
-            if (distance <= distdis)
+            if (distance <= distdis && distance >= 0)
             {
                 IsAttacking = true;
             }
