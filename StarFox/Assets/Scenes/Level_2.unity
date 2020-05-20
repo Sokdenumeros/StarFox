@@ -2129,6 +2129,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137512941}
   m_CullTransparentMesh: 0
+--- !u!1 &1200656545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7331297858634727492, guid: 6c994c4a83840e642b6bab9db5bd1495,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141326702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1200656549
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200656545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3733933, y: 0.69426256, z: 1.3733933}
+  m_Center: {x: -0.000002592802, y: 0.33037832, z: 0.00000014901161}
+--- !u!54 &1200656550
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200656545}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1220115781
 PrefabInstance:
   m_ObjectHideFlags: 0
