@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    private Vector3 offset;
+    public int speedbarrel;
     public float speed_constant;
     private bool dontcrossright;
     private bool dontcrosstop;
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                speed_constant = 10;
+                speed_constant = 15;
                 hackfast = false;
             }
         }
@@ -210,9 +210,9 @@ public class PlayerController : MonoBehaviour
         {
             
             tempsvisionula += Time.deltaTime;
-            Vector3 vect = transform.position + offset - camera.transform.position;
-            float spd = vect.magnitude;
-            spd *= spd * spd;
+           // Vector3 vect = transform.position + offset - camera.transform.position;
+            //float spd = vect.magnitude;
+            //spd *= spd * spd;
             //insect.transform.localPosition += Vector3.Normalize(vect) * spd * Time.deltaTime;
             // insect.transform.localPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z - 4);
 
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
     {
         if(barrelroll)
         {
-            rb.velocity = (movement * 20) + (new Vector3(0.0f, 0.0f, speed_constant));
+            rb.velocity = (movement * speedbarrel) + (new Vector3(0.0f, 0.0f, speed_constant));
         }
         else rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
         ClampPosition();

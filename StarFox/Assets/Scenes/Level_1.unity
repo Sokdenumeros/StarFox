@@ -3871,7 +3871,8 @@ PrefabInstance:
       propertyPath: lengthInSec
       value: 300
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 132258237217503300, guid: cdd71635203c8ed47a18dcefce87463e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cdd71635203c8ed47a18dcefce87463e, type: 3}
 --- !u!1001 &692631687
 PrefabInstance:
@@ -4142,7 +4143,8 @@ PrefabInstance:
       propertyPath: lengthInSec
       value: 300
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8937547080097884410, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
 --- !u!65 &781416361
 BoxCollider:
@@ -4574,7 +4576,8 @@ PrefabInstance:
       propertyPath: lengthInSec
       value: 300
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 958111631204387017, guid: e15f5af5b5f07bd469b5f4f98ed23c39, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e15f5af5b5f07bd469b5f4f98ed23c39, type: 3}
 --- !u!1 &822576150 stripped
 GameObject:
@@ -8941,6 +8944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  speedbarrel: 20
   speed_constant: 10
   countText: {fileID: 1930480928}
   winText: {fileID: 800823861}

@@ -1499,7 +1499,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8937547080097884410, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
 --- !u!1001 &663835804
 PrefabInstance:
@@ -1700,6 +1701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  speedbarrel: 30
   speed_constant: 15
   countText: {fileID: 1137512943}
   winText: {fileID: 435258513}
@@ -2400,7 +2402,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8937547080097884410, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
 --- !u!1001 &1666571252
 PrefabInstance:

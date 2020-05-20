@@ -22,55 +22,58 @@ public class ProjectileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.gameObject.tag = tago;
-
-        if (tago == "Enemy_Laser")
+        if (tago != null)
         {
-            //transform.localScale = new Vector3(Time.deltaTime*2, Time.deltaTime*2, Time.deltaTime*2);
-            Vector3 targetDir = player.transform.position - transform.position;
-            float step = speed * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-            transform.rotation = Quaternion.LookRotation(newDir);
-
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
-
-            temps += Time.deltaTime;
-
-            if (temps >= 5)
-            {
-                temps = 0;
-                Destroy(gameObject);
-            }
-        }
-
-        else if(tago == "purpleproj" || tago == "blueproj")
-        {
-            Vector3 targetDir = player.transform.position - transform.position;
-            float step = speed * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-            transform.rotation = Quaternion.LookRotation(newDir);
-
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
-
-            temps += Time.deltaTime;
-
-            if (temps >= 8)
-            {
-                temps = 0;
-                Destroy(gameObject);
-            }
-
-        }
-
-        else {
-
             transform.gameObject.tag = tago;
-            transform.localPosition += movement * speed * Time.deltaTime;
+
+            if (tago == "Enemy_Laser")
+            {
+                //transform.localScale = new Vector3(Time.deltaTime*2, Time.deltaTime*2, Time.deltaTime*2);
+                Vector3 targetDir = player.transform.position - transform.position;
+                float step = speed * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                transform.rotation = Quaternion.LookRotation(newDir);
+
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+                temps += Time.deltaTime;
+
+                if (temps >= 5)
+                {
+                    temps = 0;
+                    Destroy(gameObject);
+                }
+            }
+
+            else if (tago == "purpleproj" || tago == "blueproj")
+            {
+                Vector3 targetDir = player.transform.position - transform.position;
+                float step = speed * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                transform.rotation = Quaternion.LookRotation(newDir);
+
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+                temps += Time.deltaTime;
+
+                if (temps >= 8)
+                {
+                    temps = 0;
+                    Destroy(gameObject);
+                }
+
+            }
+
+            else
+            {
+
+                transform.gameObject.tag = tago;
+                transform.localPosition += movement * speed * Time.deltaTime;
+            }
+
+            if (player != null && (player.transform.position - gameObject.transform.position).magnitude > 300) Destroy(gameObject);
+
         }
-
-        if (player != null && (player.transform.position - gameObject.transform.position).magnitude > 300) Destroy(gameObject);
-
     }
 
     void OnTriggerEnter(Collider other)
@@ -82,7 +85,7 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
+        if (tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
         {
 
             enemykill.Play();
@@ -90,5 +93,6 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
 
         }
+
     }
 }

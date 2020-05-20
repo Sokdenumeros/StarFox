@@ -22,21 +22,23 @@ public class FloorEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player != null ) {
 
-        transform.LookAt(player.transform);
-        distance = transform.position.z - player.transform.position.z;
+            transform.LookAt(player.transform);
+            distance = transform.position.z - player.transform.position.z;
 
-        /* float probability = Time.deltaTime * shotsPerSeconds;
-         if (Random.value < probability)
-         {
-             shoot();
-         } */ //implementacio dispars random
+            /* float probability = Time.deltaTime * shotsPerSeconds;
+             if (Random.value < probability)
+             {
+                 shoot();
+             } */ //implementacio dispars random
 
-        
 
-        if (distance <= distdis && distance >= 0)
-            IsAttacking = true;
-        else IsAttacking = false;
+
+            if (distance <= distdis && distance >= 0)
+                IsAttacking = true;
+            else IsAttacking = false;
+        }
 
 
     }
