@@ -12,9 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool dontcrosstop;
     private bool dontcrossbot;
     private bool dontcrossleft;
-    public Text countText;
     public Text winText;
-    public Text barrelText;
     public GameObject Projectile;
     public GameObject Projectile_power;
     public GameObject insect;
@@ -50,11 +48,15 @@ public class PlayerController : MonoBehaviour
     private int countpower;
     public int greentopowerup;
     public Rigidbody rb;
+    public PB hp;
+    public PB barrelR;
 
     void Start()
     {
         movement = new Vector3(0, 0, 0);
         health = 100;
+        hp.max = 100;
+        barrelR.max = 5;
         SetCountText();
         SetPowerText();
         winText.text = "";
@@ -135,21 +137,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             inmortal = !inmortal;
-            if(inmortal == true)
-            {
-                countText.text = "GOD MODE";
-            }
-            else
-            {
-                SetCountText();
-            }
         }
 
 
-           
-           if (time > 0) time += Time.deltaTime;
-           if (time >= 5) time = 0;
-           SetBarrelText();
+
+        
+        SetBarrelText();
 
         if (turbo)
         {
@@ -331,17 +324,23 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "HP: " + health.ToString();
+        hp.setCurrent(health);
         if (health == 0) kill();
         
     }
 
     void SetBarrelText()
     {
-        if (time == 0) barrelText.text = "BarrelRoll READY";
-        else barrelText.text = time.ToString() + "/5 to have BarrelRoll";
-        
-
+        if (time > 0)
+        {
+            time += Time.deltaTime;
+            barrelR.setCurrent(time);
+        }
+        if (time >= 5)
+        {
+            barrelR.setCurrent(5);
+            time = 0;
+        }
     }
 
     void SetPowerText()
