@@ -22,6 +22,8 @@ TagManager:
   - Projectile_power
   - Boss
   - nucleo
+  - terrain
+  - Rock
   layers:
   - Default
   - TransparentFX
