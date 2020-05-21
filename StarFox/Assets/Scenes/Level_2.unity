@@ -5572,6 +5572,18 @@ PrefabInstance:
       propertyPath: notturbo
       value: 
       objectReference: {fileID: 143364874}
+    - target: {fileID: 700091962270095541, guid: f279e7f42e0e1824d8f9c34934a33484,
+        type: 3}
+      propertyPath: hp
+      value: 
+      objectReference: {fileID: 410682947734383693, guid: d435241a07c4cc841930aea258a2937c,
+        type: 3}
+    - target: {fileID: 700091962270095541, guid: f279e7f42e0e1824d8f9c34934a33484,
+        type: 3}
+      propertyPath: barrelR
+      value: 
+      objectReference: {fileID: 410682947734383693, guid: d435241a07c4cc841930aea258a2937c,
+        type: 3}
     - target: {fileID: 700091962270095543, guid: f279e7f42e0e1824d8f9c34934a33484,
         type: 3}
       propertyPath: m_Name
