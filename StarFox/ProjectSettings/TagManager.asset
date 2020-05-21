@@ -24,6 +24,7 @@ TagManager:
   - nucleo
   - terrain
   - Rock
+  - obstacle
   layers:
   - Default
   - TransparentFX

@@ -298,6 +298,8 @@ public class PlayerController : MonoBehaviour
             kill();
         }
 
+        else if (other.gameObject.CompareTag("obstacle")) kill();
+
         if (other.gameObject.CompareTag("Enemy_Laser")) relantitzat = true;
 
         if (other.gameObject.CompareTag("purpleproj")) controlsinvertits = true;
