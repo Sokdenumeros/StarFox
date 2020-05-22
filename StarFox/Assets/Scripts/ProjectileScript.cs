@@ -12,11 +12,13 @@ public class ProjectileScript : MonoBehaviour
     public Vector3 movement;
     public string tago;
     public AudioSource enemykill;
+    
 
 
     void Start()
     {
         temps = 0;
+        
     }
 
     // Update is called once per frame
@@ -78,11 +80,13 @@ public class ProjectileScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pilar"))
+        if (other.gameObject.CompareTag("barrera"))
         {
 
             
             Destroy(gameObject);
+            Destroy(other.gameObject);
+            
         }
 
         if (tago == "Projectile" && other.gameObject.CompareTag("Enemy"))
@@ -90,6 +94,14 @@ public class ProjectileScript : MonoBehaviour
 
             enemykill.Play();
             Destroy(other.gameObject);
+            Destroy(gameObject);
+
+        }
+
+        if (other.gameObject.CompareTag("obstacle"))
+        {
+
+
             Destroy(gameObject);
 
         }

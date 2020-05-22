@@ -25,6 +25,7 @@ TagManager:
   - terrain
   - Rock
   - obstacle
+  - barrera
   layers:
   - Default
   - TransparentFX
