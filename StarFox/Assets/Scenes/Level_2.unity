@@ -11608,6 +11608,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 700091962270095538, guid: f279e7f42e0e1824d8f9c34934a33484,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 700091962270095541, guid: f279e7f42e0e1824d8f9c34934a33484,
         type: 3}
       propertyPath: countText
