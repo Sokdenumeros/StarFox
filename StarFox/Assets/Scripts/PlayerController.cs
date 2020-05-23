@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.localEulerAngles = new Vector3(-moveVertical * 20 , moveHorizontal * 10, -moveHorizontal * 20);
+        transform.localEulerAngles = new Vector3(-moveVertical * 30 , moveHorizontal * 30, -moveHorizontal * 30);
 
     
         if ((dontcrossright && moveHorizontal > 0) || (dontcrossleft && moveHorizontal < 0)) movement = new Vector3(0.0f, moveVertical, 0.0f);
@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = (movement * speedbarrel) + (new Vector3(0.0f, 0.0f, speed_constant));
         }
-        else rb.velocity = (movement * speed) + (new Vector3(0.0f, 0.0f, speed_constant));
+        else rb.velocity = Quaternion.Euler(transform.localEulerAngles) * (new Vector3(0.0f, 0.0f, speed_constant));
         ClampPosition();
         
     }
@@ -366,14 +366,14 @@ public class PlayerController : MonoBehaviour
 
     void shoot(GameObject Project, string tag, bool escalat, int vel) {
         shotsound.Play();
-        GameObject p = Instantiate(Project, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
+        GameObject p = Instantiate(Project, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.Euler(transform.localEulerAngles));
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
-        p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
+        p.transform.Rotate(new Vector3 (90,0,0));
         if(escalat) p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
         else p.transform.localScale = new Vector3(5, 5, 5);
         pps.speed = vel;
         pps.tago = tag;
-        pps.movement = new Vector3(0.0f, 0.0f, 1.0f);
+        pps.movement = Quaternion.Euler(transform.localEulerAngles)* (new Vector3(0.0f, 0.0f, 1.0f));
         pps.player = gameObject;
         pps.enemykill = enemykill;
     }

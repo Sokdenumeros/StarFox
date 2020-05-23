@@ -108,8 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  temps: 0
   speed: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
   movement: {x: 0, y: 0, z: 0}
   tago: 
+  enemykill: {fileID: 0}

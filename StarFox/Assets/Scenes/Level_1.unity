@@ -9010,7 +9010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   speedbarrel: 20
-  speed_constant: 10
+  speed_constant: 30
   winText: {fileID: 800823861}
   Projectile: {fileID: 4411524355151493852, guid: aed2912206bf26444a147eebcbe68b9d,
     type: 3}
