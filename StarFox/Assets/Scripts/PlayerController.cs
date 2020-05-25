@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public PB hp;
     public PB barrelR;
+    private float graus;
 
     void Start()
     {
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
         esquerra = true;
         countpower = 0;
         time = 0;
+        graus = 45;
 
 
     }
@@ -170,11 +172,11 @@ public class PlayerController : MonoBehaviour
         if(relantitzat)
         {
             tempsrel += Time.deltaTime;
-            speed = speed_rel;
+            speed_constant = speed_rel;
             if (tempsrel >= 5)
             {
                 tempsrel = 0;
-                speed = 15;
+                speed_constant = 30;
                 relantitzat = false;
             }
         }
@@ -203,11 +205,6 @@ public class PlayerController : MonoBehaviour
         {
             
             tempsvisionula += Time.deltaTime;
-           // Vector3 vect = transform.position + offset - camera.transform.position;
-            //float spd = vect.magnitude;
-            //spd *= spd * spd;
-            //insect.transform.localPosition += Vector3.Normalize(vect) * spd * Time.deltaTime;
-            // insect.transform.localPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z - 4);
 
             insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
             if (esquerra)
@@ -231,7 +228,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.localEulerAngles = new Vector3(-moveVertical * 30 , moveHorizontal * 30, -moveHorizontal * 30);
+        transform.localEulerAngles = new Vector3(-moveVertical * graus , moveHorizontal * graus, -moveHorizontal * graus);
 
     
         if ((dontcrossright && moveHorizontal > 0) || (dontcrossleft && moveHorizontal < 0)) movement = new Vector3(0.0f, moveVertical, 0.0f);
@@ -252,13 +249,7 @@ public class PlayerController : MonoBehaviour
         movementController();
     }
 
-    void ClampPosition() //funcio per a fer que hi hagin limits invisibles a les vores
-    {
-        //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        //pos.x = Mathf.Clamp01(pos.x);
-        //pos.y = Mathf.Clamp01(pos.y);
-       // transform.position = Camera.main.ViewportToWorldPoint(pos);
-    }
+  
 
     void movementController()
     {
@@ -267,7 +258,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = (movement * speedbarrel) + (new Vector3(0.0f, 0.0f, speed_constant));
         }
         else rb.velocity = Quaternion.Euler(transform.localEulerAngles) * (new Vector3(0.0f, 0.0f, speed_constant));
-        ClampPosition();
         
     }
 
@@ -292,6 +282,13 @@ public class PlayerController : MonoBehaviour
         }
 
         else if (other.gameObject.CompareTag("obstacle")) kill();
+
+        if (other.gameObject.CompareTag("redvelcol"))
+        {
+            speed_constant = 30;
+            speedbarrel = 37;
+            graus = 30;
+        }
 
         if (other.gameObject.CompareTag("Enemy_Laser")) relantitzat = true;
 
