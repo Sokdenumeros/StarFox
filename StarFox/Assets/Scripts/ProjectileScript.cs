@@ -12,7 +12,8 @@ public class ProjectileScript : MonoBehaviour
     public Vector3 movement;
     public string tago;
     public AudioSource enemykill;
-    
+    public GameObject Explosion;
+
 
 
     void Start()
@@ -83,8 +84,9 @@ public class ProjectileScript : MonoBehaviour
         if (other.gameObject.CompareTag("barrera"))
         {
 
-            
+            Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
+            
             Destroy(other.gameObject);
             
         }
@@ -93,15 +95,26 @@ public class ProjectileScript : MonoBehaviour
         {
 
             enemykill.Play();
+
+            Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
+            
             Destroy(gameObject);
+
+        }
+
+        if (tago == "Projectile" && other.gameObject.CompareTag("Enemymover"))
+        {
+
+
+            Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
 
         }
 
         if (other.gameObject.CompareTag("obstacle"))
         {
 
-
+            Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
 
         }

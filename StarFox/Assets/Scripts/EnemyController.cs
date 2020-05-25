@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
             //p.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
             p.transform.localScale = new Vector3(0.24f, 0.24f, 0.24f);
             pps.speed = 40;
-            pps.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y,  player.transform.position.z - transform.position.z).normalized;
+            pps.movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y,  player.transform.position.z - transform.position.z + 10.0f).normalized;
             pps.tago = "Enemy_Projectile";
             pps.player = player;
             pps.enemy = gameObject;

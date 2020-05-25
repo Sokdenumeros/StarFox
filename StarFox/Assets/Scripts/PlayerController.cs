@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public ParticleSystem turbollum;
+    public GameObject Explosion;
     public float speed;
+    public GameObject Focturbo;
     public int speedbarrel;
     public float speed_constant;
     private bool dontcrossright;
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
         countpower = 0;
         time = 0;
         graus = 45;
+        turbollum.Pause();
 
 
     }
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
+            
             turboacc();
         }
         if (Input.GetKeyDown(KeyCode.B))
@@ -154,6 +159,7 @@ public class PlayerController : MonoBehaviour
                 speed_constant = 30;
                 turbotimer = 0;
                 turbo = false;
+                turbollum.Pause();
             }
         }
 
@@ -270,6 +276,7 @@ public class PlayerController : MonoBehaviour
             if (barrelroll == false)
             {
                 damage(10);
+                Instantiate(Explosion, transform.position, Quaternion.identity);
                 Destroy(other.gameObject);
                 SetCountText();
                 damaged.Play();
@@ -379,6 +386,9 @@ public class PlayerController : MonoBehaviour
     {
         if (turbocount > 0)
         {
+
+            turbollum.Play();
+
             nitro.Play();
             --turbocount;
             turbo = true;

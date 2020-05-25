@@ -115,3 +115,4 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   tago: 
   enemykill: {fileID: 0}
+  Explosion: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
