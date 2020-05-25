@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
             turbotimer += Time.deltaTime;
             if(turbotimer >= 1)
             {
-                speed_constant = 10;
+                speed_constant = 30;
                 turbotimer = 0;
                 turbo = false;
             }
@@ -382,7 +382,7 @@ public class PlayerController : MonoBehaviour
             nitro.Play();
             --turbocount;
             turbo = true;
-            speed_constant = 27;
+            speed_constant = 40;
             SetTurboText();
         }
 
