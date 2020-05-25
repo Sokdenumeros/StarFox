@@ -13,6 +13,7 @@ public class ProjectileScript : MonoBehaviour
     public string tago;
     public AudioSource enemykill;
     public GameObject Explosion;
+    public AudioSource collect;
 
 
 
@@ -67,7 +68,7 @@ public class ProjectileScript : MonoBehaviour
 
             }
 
-            else
+            else if(tago != "static_green")
             {
 
                 transform.gameObject.tag = tago;
@@ -81,7 +82,7 @@ public class ProjectileScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("barrera"))
+        if (tago != "purpleproj" && tago != "blueproj" && tago != "greenproj" && other.gameObject.CompareTag("barrera"))
         {
 
             Instantiate(Explosion, transform.position, Quaternion.identity);
@@ -111,10 +112,26 @@ public class ProjectileScript : MonoBehaviour
 
         }
 
-        if (other.gameObject.CompareTag("obstacle"))
+        if (tago != "purpleproj" && tago != "blueproj" && tago != "greenproj" && other.gameObject.CompareTag("obstacle"))
         {
 
             Instantiate(Explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+
+        }
+
+        if(tago == "greenproj" && other.gameObject.CompareTag("Player"))
+        {
+            Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
+            collect.Play();
+            Destroy(gameObject);
+
+        }
+
+        if(tago == "static_green" && other.gameObject.CompareTag("Player"))
+        {
+            Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
+            collect.Play();
             Destroy(gameObject);
 
         }

@@ -4639,6 +4639,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   tago: 
   enemykill: {fileID: 0}
+  Explosion: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!65 &4769429320064314278
 BoxCollider:
   m_ObjectHideFlags: 0

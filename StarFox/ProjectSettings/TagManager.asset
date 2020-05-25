@@ -27,6 +27,7 @@ TagManager:
   - obstacle
   - barrera
   - redvelcol
+  - static_green
   layers:
   - Default
   - TransparentFX

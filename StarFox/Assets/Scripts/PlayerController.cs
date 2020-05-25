@@ -54,9 +54,11 @@ public class PlayerController : MonoBehaviour
     public PB hp;
     public PB barrelR;
     private float graus;
+    private bool notstoped;
 
     void Start()
     {
+        notstoped = true;
         movement = new Vector3(0, 0, 0);
         health = 100;
         hp.max = 100;
@@ -94,141 +96,155 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-       
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(transform.position.z == 1391)
         {
-            if (countpower == greentopowerup)
-            {
-                shoot(Projectile_power, "Projectile_power", false, 27);
-                countpower = 0;
-                SetPowerText();
-            }
-            else shoot(Projectile, "Projectile", true, 100);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            
-            turboacc();
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            
-            if (time == 0)
-            {
-                barrelroll = true;
-                spin.Play();
-                time += Time.deltaTime;
-            }
+            notstoped = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && inmortal)
+        if (notstoped)
         {
-            if (hackfast == false)
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                speed_constant = 40;
-                hackfast = true;
+                if (countpower == greentopowerup)
+                {
+                    shoot(Projectile_power, "Projectile_power", false, 60);
+                    countpower = 0;
+                    SetPowerText();
+                }
+                else shoot(Projectile, "Projectile", true, 100);
             }
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+
+                turboacc();
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+
+                if (time == 0)
+                {
+                    barrelroll = true;
+                    spin.Play();
+                    time += Time.deltaTime;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.F) && inmortal)
+            {
+                if (hackfast == false)
+                {
+                    speed_constant = 40;
+                    hackfast = true;
+                }
+                else
+                {
+                    speed_constant = 15;
+                    hackfast = false;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.P) && inmortal)
+            {
+
+                countpower = greentopowerup;
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                inmortal = !inmortal;
+            }
+
+
+
+
+            SetBarrelText();
+
+            if (turbo)
+            {
+                turbotimer += Time.deltaTime;
+                if (turbotimer >= 1)
+                {
+                    speed_constant = 30;
+                    turbotimer = 0;
+                    turbo = false;
+                    turbollum.Pause();
+                }
+            }
+
+            if (barrelroll)
+            {
+                transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
+                rotation = rotation + 5;
+                if (rotation == 360)
+                {
+                    rotation = 0;
+                    barrelroll = false;
+                }
+
+            }
+
+            if (relantitzat)
+            {
+                tempsrel += Time.deltaTime;
+                speed_constant = speed_rel;
+                if (tempsrel >= 5)
+                {
+                    tempsrel = 0;
+                    speed_constant = 30;
+                    relantitzat = false;
+                }
+            }
+
+            if (controlsinvertits)
+            {
+                tempsinvertit += Time.deltaTime;
+                moveVertical = Input.GetAxis("Horizontal");
+                moveHorizontal = Input.GetAxis("Vertical");
+                movement = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0.0f);
+                if (tempsinvertit >= 5)
+                {
+                    tempsinvertit = 0;
+                    controlsinvertits = false;
+                }
+            }
+
             else
             {
-                speed_constant = 15;
-                hackfast = false;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.P) && inmortal)
-        {
-
-            countpower = greentopowerup;
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            inmortal = !inmortal;
-        }
-
-
-
-        
-        SetBarrelText();
-
-        if (turbo)
-        {
-            turbotimer += Time.deltaTime;
-            if(turbotimer >= 1)
-            {
-                speed_constant = 30;
-                turbotimer = 0;
-                turbo = false;
-                turbollum.Pause();
-            }
-        }
-
-        if(barrelroll)
-        {
-            transform.localEulerAngles= new Vector3(0.0f, 0.0f, -rotation);
-            rotation = rotation + 5;
-            if (rotation == 360)
-            {
-                rotation = 0;
-                barrelroll = false;
+                moveHorizontal = Input.GetAxis("Horizontal");
+                moveVertical = Input.GetAxis("Vertical");
+                movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
             }
 
-        }
-
-        if(relantitzat)
-        {
-            tempsrel += Time.deltaTime;
-            speed_constant = speed_rel;
-            if (tempsrel >= 5)
+            if (visionula)
             {
-                tempsrel = 0;
-                speed_constant = 30;
-                relantitzat = false;
-            }
-        }
 
-        if (controlsinvertits)
-        {
-            tempsinvertit += Time.deltaTime;
-            moveVertical = Input.GetAxis("Horizontal");
-            moveHorizontal = Input.GetAxis("Vertical");
-            movement = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0.0f);
-            if (tempsinvertit >= 5)
-            {
-                tempsinvertit = 0;
-                controlsinvertits = false;
+                tempsvisionula += Time.deltaTime;
+
+                insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
+                if (esquerra)
+                {
+                    camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
+                    esquerra = false;
+                }
+                else if (!esquerra)
+                {
+                    camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
+                    esquerra = true;
+                }
+                if (tempsvisionula >= 5)
+                {
+                    insect.transform.localPosition = new Vector3(-10, -10, -10);
+                    tempsvisionula = 0;
+                    visionula = false;
+                }
             }
         }
 
         else
         {
-            moveHorizontal = Input.GetAxis("Horizontal");
-            moveVertical = Input.GetAxis("Vertical");
-            movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
-        }
-
-        if (visionula)
-        {
-            
-            tempsvisionula += Time.deltaTime;
-
-            insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
-            if (esquerra)
-            {
-                camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
-                esquerra = false;
-            }
-            else if (!esquerra)
-            {
-                camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
-                esquerra = true;
-            }
-            if (tempsvisionula >= 5)
-            {
-                insect.transform.localPosition = new Vector3(-10, -10, -10);
-                tempsvisionula = 0;
-                visionula = false;
-            }
+            notstoped = true;
+            //camera.transform.position += objecte.transform.position.normalized * 20 
         }
     }
 
@@ -273,22 +289,30 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy_Projectile"))
         {
-            if (barrelroll == false)
-            {
-                damage(10);
-                Instantiate(Explosion, transform.position, Quaternion.identity);
-                Destroy(other.gameObject);
-                SetCountText();
-                damaged.Play();
-            }
+            damage(10);
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+            SetCountText();
+            damaged.Play();
+
         }
 
         else if (other.gameObject.CompareTag("barrera") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Enemymover"))
         {
-            kill();
+            damage(10);
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+            SetCountText();
+            damaged.Play();
         }
 
-        else if (other.gameObject.CompareTag("obstacle")) kill();
+        else if (other.gameObject.CompareTag("obstacle"))
+
+        {
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            kill();
+        }
 
         if (other.gameObject.CompareTag("redvelcol"))
         {
@@ -303,7 +327,7 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("blueproj")) visionula = true;
 
-        if (other.gameObject.CompareTag("greenproj"))
+        if (other.gameObject.CompareTag("greenproj") || other.gameObject.CompareTag("static_green"))
         {
             if (countpower < greentopowerup)
             {
@@ -331,7 +355,11 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         hp.setCurrent(health);
-        if (health == 0) kill();
+        if (health == 0)
+        {
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            kill();
+        }
         
     }
 
