@@ -54,11 +54,13 @@ public class PlayerController : MonoBehaviour
     public PB hp;
     public PB barrelR;
     private float graus;
-    private bool notstoped;
+    private bool baresqu;
+    private bool bardreta;
 
     void Start()
     {
-        notstoped = true;
+        baresqu = false;
+        bardreta = false;
         movement = new Vector3(0, 0, 0);
         health = 100;
         hp.max = 100;
@@ -96,13 +98,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if(transform.position.z == 1391)
-        {
-            notstoped = false;
-        }
-
-        if (notstoped)
-        {
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -125,7 +120,7 @@ public class PlayerController : MonoBehaviour
                 if (time == 0)
                 {
                     barrelroll = true;
-                    spin.Play();
+                    
                     time += Time.deltaTime;
                 }
             }
@@ -134,12 +129,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (hackfast == false)
                 {
-                    speed_constant = 40;
+                    speed_constant = 200;
                     hackfast = true;
                 }
                 else
                 {
-                    speed_constant = 15;
+                    speed_constant = 30;
                     hackfast = false;
                 }
             }
@@ -174,13 +169,45 @@ public class PlayerController : MonoBehaviour
 
             if (barrelroll)
             {
-                transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
-                rotation = rotation + 5;
-                if (rotation == 360)
+                if (bardreta == false  && Input.GetAxis("Horizontal") > 0)
                 {
-                    rotation = 0;
-                    barrelroll = false;
+                    bardreta = true;
+                    spin.Play();
+            }
+
+                else if(baresqu == false  && Input.GetAxis("Horizontal") < 0 )
+                {
+                    baresqu = true;
+                    spin.Play();
+            }
+
+                if (bardreta)
+                {
+                    transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
+                    rotation = rotation + 5;
+                    if (rotation == 360)
+                    {
+                        rotation = 0;
+                        barrelroll = false;
+                        bardreta = false;
+                    }
+
                 }
+
+                else if (baresqu)
+                {
+
+                    transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotation);
+                    rotation = rotation + 5;
+                    if (rotation == 360)
+                    {
+                        rotation = 0;
+                        barrelroll = false;
+                        baresqu = false;
+                    }
+
+                }
+                
 
             }
 
@@ -216,36 +243,32 @@ public class PlayerController : MonoBehaviour
                 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
             }
 
-            if (visionula)
+        if (visionula)
+        {
+
+            tempsvisionula += Time.deltaTime;
+
+            insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
+            if (esquerra)
             {
-
-                tempsvisionula += Time.deltaTime;
-
-                insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
-                if (esquerra)
-                {
-                    camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
-                    esquerra = false;
-                }
-                else if (!esquerra)
-                {
-                    camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
-                    esquerra = true;
-                }
-                if (tempsvisionula >= 5)
-                {
-                    insect.transform.localPosition = new Vector3(-10, -10, -10);
-                    tempsvisionula = 0;
-                    visionula = false;
-                }
+                camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = false;
+            }
+            else if (!esquerra)
+            {
+                camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = true;
+            }
+            if (tempsvisionula >= 5)
+            {
+                insect.transform.localPosition = new Vector3(-10, -10, -10);
+                tempsvisionula = 0;
+                visionula = false;
             }
         }
+         
 
-        else
-        {
-            notstoped = true;
-            //camera.transform.position += objecte.transform.position.normalized * 20 
-        }
+       
     }
 
     void FixedUpdate()

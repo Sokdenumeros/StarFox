@@ -24,10 +24,12 @@ public class Boss2Script : MonoBehaviour
     private float tempsmov;
     private float tempsproj;
     private float tempsenemics;
+    private float tempsb;
     // Start is called before the first frame update
     void Start()
     {
         temps = 0;
+        tempsb = 0;
         bossText.text = "No Boss yet";
         tipusmoviment = Random.Range(0.0f, 0.81f);
         stopmov = false;
@@ -52,9 +54,15 @@ public class Boss2Script : MonoBehaviour
         {
             if(first)
             {
-                transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y + 70, player.transform.position.z + 100);
-                first = false;
-                SetBossText();
+                tempsb += Time.deltaTime;
+                transform.localPosition += new Vector3(player.transform.position.x, player.transform.position.y + 50, -player.transform.position.z).normalized * 60 * Time.deltaTime;
+
+                if (tempsb >= 3)
+                {
+                    tempsb = 0;
+                    first = false;
+                    SetBossText();
+                }
             }
 
            
@@ -73,9 +81,18 @@ public class Boss2Script : MonoBehaviour
                 if (temps >= 50)
                 {
 
-                    primer = false;
-                    transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 100);
-                    temps = 0;
+                    tempsb += Time.deltaTime;
+                    transform.localPosition += new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z).normalized * 60 * Time.deltaTime;
+
+                    if (tempsb >= 1)
+                    {
+                        tempsb = 0;
+                        temps = 0;
+                        primer = false;
+                    }
+                    
+                    
+                    
                 }
 
                 tempsproj += Time.deltaTime;
@@ -196,10 +213,41 @@ public class Boss2Script : MonoBehaviour
     void enemicbasic()
     {
         Vector3 aux = transform.position;
-        Quaternion q = Quaternion.identity;
-        GameObject e = Instantiate(Basic, aux, q);
+        GameObject e = Instantiate(Basic, aux, Quaternion.identity);
         CarController ec = (CarController)e.GetComponent(typeof(CarController));
-        ec.player = player;
+        ec.movement = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 100);
+
+        GameObject e1 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec1 = (CarController)e1.GetComponent(typeof(CarController));
+        ec1.movement = new Vector3(player.transform.position.x - 10, player.transform.position.y, player.transform.position.z + 100);
+
+        GameObject e2 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec2 = (CarController)e2.GetComponent(typeof(CarController));
+        ec2.movement = new Vector3(player.transform.position.x + 10, player.transform.position.y, player.transform.position.z + 100);
+
+        GameObject e3 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec3 = (CarController)e3.GetComponent(typeof(CarController));
+        ec3.movement = new Vector3(player.transform.position.x, player.transform.position.y + 10, player.transform.position.z + 100);
+
+        GameObject e4 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec4 = (CarController)e4.GetComponent(typeof(CarController));
+        ec4.movement = new Vector3(player.transform.position.x, player.transform.position.y - 10, player.transform.position.z + 100);
+
+        GameObject e5 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec5 = (CarController)e5.GetComponent(typeof(CarController));
+        ec5.movement = new Vector3(player.transform.position.x - 10, player.transform.position.y - 10, player.transform.position.z + 100);
+
+        GameObject e6 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec6 = (CarController)e6.GetComponent(typeof(CarController));
+        ec6.movement = new Vector3(player.transform.position.x + 10, player.transform.position.y + 10, player.transform.position.z + 100);
+
+        GameObject e7 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec7 = (CarController)e7.GetComponent(typeof(CarController));
+        ec7.movement = new Vector3(player.transform.position.x + 10, player.transform.position.y - 10, player.transform.position.z + 100);
+
+        GameObject e8 = Instantiate(Basic, aux, Quaternion.identity);
+        CarController ec8 = (CarController)e8.GetComponent(typeof(CarController));
+        ec8.movement = new Vector3(player.transform.position.x - 10, player.transform.position.y + 10, player.transform.position.z + 100);
 
         /*GameObject e1 = Instantiate(Basic, aux + new Vector3(6, 0, 0), q);
         EnemyController ec1 = (EnemyController)e1.GetComponent(typeof(EnemyController));
