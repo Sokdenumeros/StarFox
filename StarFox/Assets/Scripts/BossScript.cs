@@ -43,61 +43,63 @@ public class BossScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        tipusprojectil = Random.Range(0.0f, 3.1f);
-        
-
-        if (player.transform.position.z >= 889.5529)
+        if (player != null)
         {
-            tempsenemics += Time.deltaTime;
-            if (tempsenemics >= 5)
+            tipusprojectil = Random.Range(0.0f, 3.1f);
+
+
+            if (player.transform.position.z >= 889.5529)
             {
-                if (counte == 0) enemicbasic();
-                else if (counte == 1) enemicnormal();
-                else if (counte == 2) enemicmoviment();
-                ++counte;
-                if (counte == 3) counte = 0;
-                tempsenemics = 0;
-            }
+                tempsenemics += Time.deltaTime;
+                if (tempsenemics >= 5)
+                {
+                    if (counte == 0) enemicbasic();
+                    else if (counte == 1) enemicnormal();
+                    else if (counte == 2) enemicmoviment();
+                    ++counte;
+                    if (counte == 3) counte = 0;
+                    tempsenemics = 0;
+                }
 
-            temps += Time.deltaTime;
-            if (primer)
-            {
-                SetBossText();
-                primer = false;
-                transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 150);
-            }
-
-
-            
-            transform.localPosition += new Vector3(0, 0, 1) * 10 * Time.deltaTime;
-
-            if (stopmov == false)
-            {
-                tipusmoviment = Random.Range(0.0f, 0.8f);
-                if (tipusmoviment <= 0.1) position = new Vector3(1, 1, 0);
-                else if (tipusmoviment <= 0.2) position = new Vector3(1, 0, 0);
-                else if (tipusmoviment <= 0.3) position = new Vector3(0, 1, 0);
-                else if (tipusmoviment <= 0.4) position = new Vector3(-1, 1, 0);
-                else if (tipusmoviment <= 0.5) position = new Vector3(1, -1, 0);
-                else if (tipusmoviment <= 0.6) position = new Vector3(0, -1, 0);
-                else if (tipusmoviment <= 0.7) position = new Vector3(-1, -1, 0);
-                else if (tipusmoviment <= 0.8) position = new Vector3(-1, 0, 0);
-                
-            }
+                temps += Time.deltaTime;
+                if (primer)
+                {
+                    SetBossText();
+                    primer = false;
+                    transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 150);
+                }
 
 
 
-           moviment(position);
+                transform.localPosition += new Vector3(0, 0, 1) * 10 * Time.deltaTime;
 
-            if (temps >= 7)
-            {
+                if (stopmov == false)
+                {
+                    tipusmoviment = Random.Range(0.0f, 0.8f);
+                    if (tipusmoviment <= 0.1) position = new Vector3(1, 1, 0);
+                    else if (tipusmoviment <= 0.2) position = new Vector3(1, 0, 0);
+                    else if (tipusmoviment <= 0.3) position = new Vector3(0, 1, 0);
+                    else if (tipusmoviment <= 0.4) position = new Vector3(-1, 1, 0);
+                    else if (tipusmoviment <= 0.5) position = new Vector3(1, -1, 0);
+                    else if (tipusmoviment <= 0.6) position = new Vector3(0, -1, 0);
+                    else if (tipusmoviment <= 0.7) position = new Vector3(-1, -1, 0);
+                    else if (tipusmoviment <= 0.8) position = new Vector3(-1, 0, 0);
 
-                if (tipusprojectil <= 1) creaProjectil(Projectile1, "blueproj", 40);
-                else if (tipusprojectil > 1 && tipusprojectil <= 2) creaProjectil(Projectile2, "greenproj", 20);
-                else if (tipusprojectil > 2 && tipusprojectil <= 3) creaProjectil(Projectile3, "purpleproj", 40);
+                }
 
-                temps = 0;
+
+
+                moviment(position);
+
+                if (temps >= 7)
+                {
+
+                    if (tipusprojectil <= 1) creaProjectil(Projectile1, "blueproj", 40);
+                    else if (tipusprojectil > 1 && tipusprojectil <= 2) creaProjectil(Projectile2, "greenproj", 20);
+                    else if (tipusprojectil > 2 && tipusprojectil <= 3) creaProjectil(Projectile3, "purpleproj", 40);
+
+                    temps = 0;
+                }
             }
         }
     }

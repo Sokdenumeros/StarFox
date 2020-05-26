@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource spin;
     public AudioSource nitro;
     public AudioSource notturbo;
+    public AudioSource killexplo;
     public int speed_rel;
     private bool inmortal;
     private bool relantitzat;
@@ -117,7 +118,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.B))
             {
 
-                if (time == 0)
+                if (time == 0 && Input.GetAxis("Horizontal") != 0)
                 {
                     barrelroll = true;
                     
@@ -298,7 +299,7 @@ public class PlayerController : MonoBehaviour
 
     void movementController()
     {
-        if(barrelroll)
+        if(barrelroll && (bardreta || baresqu))
         {
             rb.velocity = (movement * speedbarrel) + (new Vector3(0.0f, 0.0f, speed_constant));
         }
@@ -330,10 +331,11 @@ public class PlayerController : MonoBehaviour
             damaged.Play();
         }
 
-        else if (other.gameObject.CompareTag("obstacle"))
+        else if (other.gameObject.CompareTag("obstacle") || other.gameObject.CompareTag("terrain"))
 
         {
             Instantiate(Explosion, transform.position, Quaternion.identity);
+            killexplo.Play();
             kill();
         }
 
@@ -381,6 +383,7 @@ public class PlayerController : MonoBehaviour
         if (health == 0)
         {
             Instantiate(Explosion, transform.position, Quaternion.identity);
+            killexplo.Play();
             kill();
         }
         

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3317232}
   - component: {fileID: 2317232}
   - component: {fileID: 9517232}
-  - component: {fileID: 6561109275419458126}
   - component: {fileID: 5681447561836370747}
   - component: {fileID: -667028431989483062}
+  - component: {fileID: 4338603712466440998}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: Rock
+  m_TagString: barrera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,19 +103,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &6561109275419458126
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117232}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 24.434101, y: 19.712212, z: 20.02393}
-  m_Center: {x: 2.2684703, y: -0.41045523, z: -0.015044697}
 --- !u!54 &5681447561836370747
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -145,6 +132,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impact: {fileID: 0}
+--- !u!135 &4338603712466440998
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117232}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.217051
+  m_Center: {x: 2.2684703, y: -0.41045523, z: -0.015044697}
 --- !u!1001 &1324585625313698645
 PrefabInstance:
   m_ObjectHideFlags: 0

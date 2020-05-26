@@ -15,7 +15,7 @@ public class trapcontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.transform.position.z >= trapdist) {
+        if(player != null && player.transform.position.z >= trapdist) {
             Destroy(gameObject);
         }
     }
