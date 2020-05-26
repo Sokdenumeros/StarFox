@@ -8,6 +8,7 @@ public class ShotAllienController : MonoBehaviour
     public GameObject player;
     public bool IsAttacking;
     public float distance;
+    public AudioSource risa;
     //public float shotsPerSeconds; impleemntacio dispars random
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,7 @@ public class ShotAllienController : MonoBehaviour
             pps.tago = "Enemy_Projectile";
             pps.player = player;
             pps.enemy = gameObject;
+            pps.risa = risa;
         }
     }
 }

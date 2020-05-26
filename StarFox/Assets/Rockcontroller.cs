@@ -23,12 +23,12 @@ public class Rockcontroller : MonoBehaviour
     {
 
 
-        if (other.gameObject.CompareTag("Rock"))
+        if (other.gameObject.CompareTag("terrain"))
         {
             if (impacte == false)
             {
                 impact.Play();
-                //impacte = true;
+                impacte = true;
             }
         }
     }

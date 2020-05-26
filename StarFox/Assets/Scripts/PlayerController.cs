@@ -343,7 +343,7 @@ public class PlayerController : MonoBehaviour
         {
             speed_constant = 30;
             speedbarrel = 37;
-            graus = 30;
+            
         }
 
         if (other.gameObject.CompareTag("Enemy_Laser")) relantitzat = true;

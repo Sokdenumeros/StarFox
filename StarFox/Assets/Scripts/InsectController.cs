@@ -11,6 +11,8 @@ public class InsectController : MonoBehaviour
     private bool primer = true;
     public float distdisp;
     public bool comença;
+    public AudioSource risa;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class InsectController : MonoBehaviour
                     if (primer)
                     {
                         primer = false;
-                        transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 20);
+                        transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 50);
                         Quaternion q = Quaternion.identity;
                         q.SetLookRotation(new Vector3(0, 1, 0), player.transform.position - transform.position);
                         GameObject p = Instantiate(Projectile, transform.position + new Vector3(0.0f, 0.0f, 1.0f), q);
@@ -49,8 +51,9 @@ public class InsectController : MonoBehaviour
                         pps.tago = "Enemy_Laser";
                         pps.player = player;
                         pps.enemy = gameObject;
+                        pps.risa = risa;
                     }
-                    if (temps >= 5)
+                    if (temps >= 7)
                     {
                         primer = true;
                         temps = 0;
@@ -66,7 +69,7 @@ public class InsectController : MonoBehaviour
                         primer = false;
                         transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 20);
                     }
-                    if (temps >= 5)
+                    if (temps >= 7)
                     {
                         primer = true;
                         temps = 0;

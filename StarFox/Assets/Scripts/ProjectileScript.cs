@@ -12,14 +12,18 @@ public class ProjectileScript : MonoBehaviour
     public Vector3 movement;
     public string tago;
     public AudioSource enemykill;
+    public AudioSource dispar;
+    public AudioSource risa;
     public GameObject Explosion;
     public AudioSource collect;
+    private bool primer;
 
 
 
     void Start()
     {
         temps = 0;
+        primer = true;
         
     }
 
@@ -32,6 +36,11 @@ public class ProjectileScript : MonoBehaviour
 
             if (tago == "Enemy_Laser")
             {
+                if (primer)
+                {
+                    risa.Play();
+                    primer = false;
+                }
                 //transform.localScale = new Vector3(Time.deltaTime*2, Time.deltaTime*2, Time.deltaTime*2);
                 Vector3 targetDir = player.transform.position - transform.position;
                 float step = speed * Time.deltaTime;
@@ -50,7 +59,8 @@ public class ProjectileScript : MonoBehaviour
             }
 
             else if (tago == "purpleproj" || tago == "blueproj")
-            {
+            { 
+
                 Vector3 targetDir = player.transform.position - transform.position;
                 float step = speed * Time.deltaTime;
                 Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
@@ -70,6 +80,12 @@ public class ProjectileScript : MonoBehaviour
 
             else if(tago != "static_green")
             {
+
+                if (primer)
+                {
+                    //dispar.Play();
+                    primer = false;
+                }
 
                 transform.gameObject.tag = tago;
                 transform.localPosition += movement * speed * Time.deltaTime;
