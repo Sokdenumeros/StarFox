@@ -12,16 +12,18 @@ public class nucleocontroller : MonoBehaviour
     public GameObject purplefire;
     public GameObject nau1;
     public GameObject nau2;
+    public PB nuclivida;
     // Start is called before the first frame update
     void Start()
     {
+        nuclivida.max = win;
         count = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
 
@@ -32,7 +34,7 @@ public class nucleocontroller : MonoBehaviour
         if (other.gameObject.CompareTag("Projectile"))
         {
             ++count;
-
+            nuclivida.setCurrent(win - count);
             if (count >= win)
             {
                 Destroy(gameObject);

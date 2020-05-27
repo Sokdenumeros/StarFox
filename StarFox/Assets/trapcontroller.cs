@@ -6,12 +6,10 @@ public class trapcontroller : MonoBehaviour
 {
     public GameObject player;
     public int trapdist;
-    private bool primer;
     public AudioSource caiguda;
     // Start is called before the first frame update
     void Start()
     {
-        primer = true;
     }
 
     // Update is called once per frame
