@@ -10,13 +10,13 @@ public class Rockcontroller : MonoBehaviour
     void Start()
     {
         impacte = false;
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -30,6 +30,15 @@ public class Rockcontroller : MonoBehaviour
                 impact.Play();
                 impacte = true;
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (impacte == false)
+        {
+            if(impact != null) impact.Play();
+            impacte = true;
         }
     }
 }
