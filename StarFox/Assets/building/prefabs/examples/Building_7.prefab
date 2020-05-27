@@ -317,6 +317,8 @@ GameObject:
   - component: {fileID: 494730}
   - component: {fileID: -5992344735159935622}
   - component: {fileID: 4826750774641675484}
+  - component: {fileID: 2018572693285521311}
+  - component: {fileID: 7963416704984416609}
   m_Layer: 0
   m_Name: Building_7
   m_TagString: obstacle
@@ -376,8 +378,34 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 32.06247, y: 35.809677, z: 15.727536}
-  m_Center: {x: 0.11414337, y: 17.404839, z: 0.06583643}
+  m_Size: {x: 31.490128, y: 34.071518, z: 11.6956}
+  m_Center: {x: 0.016155243, y: 16.535759, z: -0.22891855}
+--- !u!65 &2018572693285521311
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.993689, y: 26.40191, z: 17.878483}
+  m_Center: {x: 0.02100277, y: 12.700955, z: 0.10787773}
+--- !u!65 &7963416704984416609
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.317655, y: 8.198967, z: 15.267817}
+  m_Center: {x: 0.0052428246, y: 32.068047, z: -0.04920101}
 --- !u!1 &102250
 GameObject:
   m_ObjectHideFlags: 0

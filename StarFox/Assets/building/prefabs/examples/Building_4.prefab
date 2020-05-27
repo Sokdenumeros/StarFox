@@ -3761,6 +3761,8 @@ GameObject:
   - component: {fileID: 455328}
   - component: {fileID: 4928781350881830614}
   - component: {fileID: 6387180336804222551}
+  - component: {fileID: -1095372039892077254}
+  - component: {fileID: 2749672986046500757}
   m_Layer: 0
   m_Name: Building_4
   m_TagString: obstacle
@@ -3811,8 +3813,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 31.863369, y: 54.99425, z: 12.332742}
-  m_Center: {x: -0.096925735, y: 27.195517, z: -0.04548788}
+  m_Size: {x: 31.099266, y: 53.68672, z: 12.332742}
+  m_Center: {x: -0.11234665, y: 27.377903, z: -0.04548788}
 --- !u!54 &6387180336804222551
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3829,6 +3831,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &-1095372039892077254
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.816383, y: 14.844147, z: 15.267817}
+  m_Center: {x: -0.057699203, y: 49.691902, z: -0.04920101}
+--- !u!65 &2749672986046500757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.993689, y: 46.972584, z: 18.304985}
+  m_Center: {x: 0.02100277, y: 22.986292, z: -0.105372906}
 --- !u!1 &124318
 GameObject:
   m_ObjectHideFlags: 0
