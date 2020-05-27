@@ -26,6 +26,12 @@ public class BossScript : MonoBehaviour
     private float tempsmov;
     private int counte;
     private float tempsenemics;
+    public AudioSource basica;
+    public AudioSource normala;
+    public AudioSource movimenta;
+    public AudioSource dispar;
+    public AudioSource collect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +77,7 @@ public class BossScript : MonoBehaviour
 
 
 
-                transform.localPosition += new Vector3(0, 0, 1) * 10 * Time.deltaTime;
+                transform.localPosition += new Vector3(0, 0, 1) * 30 * Time.deltaTime;
 
                 if (stopmov == false)
                 {
@@ -120,6 +126,8 @@ public class BossScript : MonoBehaviour
         pps.tago = tag;
         pps.player = player;
         pps.enemy = gameObject;
+        pps.dispar = dispar;
+        pps.collect = collect;
     }
 
     void SetBossText()
@@ -188,24 +196,29 @@ public class BossScript : MonoBehaviour
         GameObject e = Instantiate(Basic, aux, q);
         EnemyController ec = (EnemyController)e.GetComponent(typeof(EnemyController));
         ec.player = player;
+        ec.dispar = basica;
 
         GameObject e1 = Instantiate(Basic, aux + new Vector3(6, 0, 0), q);
         EnemyController ec1 = (EnemyController)e1.GetComponent(typeof(EnemyController));
         ec1.player = player;
+        ec1.dispar = basica;
 
-      
+
         GameObject e2 = Instantiate(Basic, aux - new Vector3(6, 0, 0), q);
         EnemyController ec2 = (EnemyController)e2.GetComponent(typeof(EnemyController));
         ec2.player = player;
+        ec2.dispar = basica;
 
         GameObject e3 = Instantiate(Basic, aux + new Vector3(0, 6, 0), q);
         EnemyController ec3 = (EnemyController)e3.GetComponent(typeof(EnemyController));
         ec3.player = player;
+        ec3.dispar = basica;
 
-       
+
         GameObject e4 = Instantiate(Basic, aux - new Vector3(0, 6, 0), q);
         EnemyController ec4 = (EnemyController)e4.GetComponent(typeof(EnemyController));
         ec4.player = player;
+        ec4.dispar = basica;
 
 
     }
@@ -217,15 +230,18 @@ public class BossScript : MonoBehaviour
         GameObject en = Instantiate(Normal, aux1, qn);
         FloorEnemyController ecn = (FloorEnemyController)en.GetComponent(typeof(FloorEnemyController));
         ecn.player = player;
+        ecn.dispar = normala;
 
-      
+
         GameObject en1 = Instantiate(Normal, aux1 - new Vector3(0,  15, 0), qn);
         FloorEnemyController ecn1 = (FloorEnemyController)en1.GetComponent(typeof(FloorEnemyController));
         ecn1.player = player;
-        
+        ecn1.dispar = normala;
+
         GameObject en2 = Instantiate(Normal, aux1 + new Vector3(15, 0, 0), qn);
         FloorEnemyController ecn2 = (FloorEnemyController)en2.GetComponent(typeof(FloorEnemyController));
         ecn2.player = player;
+        ecn2.dispar = normala;
     }
     void enemicmoviment() {
 
@@ -234,10 +250,14 @@ public class BossScript : MonoBehaviour
         GameObject em = Instantiate(movimente, aux2, qm);
         EnemyController ema = (EnemyController)em.GetComponent(typeof(EnemyController));
         ema.player = player;
+        ema.dispar = movimenta;
+        ema.distdis = 200;
 
         MovingEnemyController emb = (MovingEnemyController)em.GetComponent(typeof(MovingEnemyController));
         emb.player = player;
-        emb.distdisp = player.transform.position.z + 40;
+        emb.distdisp = player.transform.position.z + 100;
+        emb.speed = 30;
+        emb.speed_constant = 30;
 
     }
 }

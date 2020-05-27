@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     private bool IsAttacking;
     private float distance;
     public float distdis;
+    public AudioSource dispar;
     //public float shotsPerSeconds; impleemntacio dispars random
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,7 @@ public class EnemyController : MonoBehaviour
             pps.tago = "Enemy_Projectile";
             pps.player = player;
             pps.enemy = gameObject;
+            pps.dispar = dispar;
         }
     }
 }

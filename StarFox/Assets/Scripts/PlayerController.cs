@@ -215,11 +215,11 @@ public class PlayerController : MonoBehaviour
             if (relantitzat)
             {
                 tempsrel += Time.deltaTime;
-                speed_constant = speed_rel;
+                graus = 20;
                 if (tempsrel >= 5)
                 {
                     tempsrel = 0;
-                    speed_constant = 30;
+                graus = 45;
                     relantitzat = false;
                 }
             }

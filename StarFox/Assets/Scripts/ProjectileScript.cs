@@ -59,7 +59,12 @@ public class ProjectileScript : MonoBehaviour
             }
 
             else if (tago == "purpleproj" || tago == "blueproj")
-            { 
+            {
+                if (primer)
+                {
+                    dispar.Play();
+                    primer = false;
+                }
 
                 Vector3 targetDir = player.transform.position - transform.position;
                 float step = speed * Time.deltaTime;
@@ -83,7 +88,7 @@ public class ProjectileScript : MonoBehaviour
 
                 if (primer)
                 {
-                    //dispar.Play();
+                    if(dispar != null) dispar.Play();
                     primer = false;
                 }
 

@@ -25,6 +25,7 @@ public class Boss2Script : MonoBehaviour
     private float tempsproj;
     private float tempsenemics;
     private float tempsb;
+    public AudioSource dispar;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +58,7 @@ public class Boss2Script : MonoBehaviour
                 tempsb += Time.deltaTime;
                 transform.localPosition += new Vector3(player.transform.position.x, player.transform.position.y + 50, -player.transform.position.z).normalized * 60 * Time.deltaTime;
 
-                if (tempsb >= 3)
+                if (tempsb >= 2)
                 {
                     tempsb = 0;
                     first = false;
@@ -149,6 +150,7 @@ public class Boss2Script : MonoBehaviour
         pps.tago = tag;
         pps.player = player;
         pps.enemy = gameObject;
+        pps.dispar = dispar;
     }
 
     void SetBossText()
