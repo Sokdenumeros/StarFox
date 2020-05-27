@@ -57,9 +57,11 @@ public class PlayerController : MonoBehaviour
     private float graus;
     private bool baresqu;
     private bool bardreta;
+    private float timeshot;
 
     void Start()
     {
+
         baresqu = false;
         bardreta = false;
         movement = new Vector3(0, 0, 0);
@@ -93,27 +95,27 @@ public class PlayerController : MonoBehaviour
         graus = 45;
         turbollum.Pause();
 
-
     }
 
     void Update()
     {
 
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (countpower == greentopowerup)
-                {
-                    shoot(Projectile_power, "Projectile_power", false, 60);
-                    countpower = 0;
-                    SetPowerText();
-                }
-                else shoot(Projectile, "Projectile", true, 100);
+        timeshot -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (countpower == greentopowerup) {
+                shoot(Projectile_power, "Projectile_power", false, 60);
+                countpower = 0;
+                SetPowerText();
             }
-            if (Input.GetKeyDown(KeyCode.N))
+            else
             {
-
-                turboacc();
+                shoot(Projectile, "Projectile", true, 100);
+            }
+        }
+        if (Input.GetKey(KeyCode.Space)) if (timeshot <= 0.0f) shoot(Projectile, "Projectile", true, 100);
+        if (Input.GetKeyDown(KeyCode.N)){
+            turboacc();
             }
             if (Input.GetKeyDown(KeyCode.B))
             {
@@ -395,18 +397,20 @@ public class PlayerController : MonoBehaviour
         {
             time += Time.deltaTime;
             barrelR.setCurrent(time);
+            barrelR.gameObject.SetActive(true);
         }
         if (time >= 5)
         {
             barrelR.setCurrent(5);
+            barrelR.gameObject.SetActive(false);
             time = 0;
         }
     }
 
     void SetPowerText()
     {
-        if (countpower == greentopowerup) powerText.text = "SUPER SHOT READY";
-        else powerText.text = "Power to super shot: " + countpower.ToString() + "/" + greentopowerup;
+        if (countpower == greentopowerup) powerText.text = "SUPER SHOT: READY";
+        else powerText.text = "SUPER SHOT: " + countpower.ToString() + "/" + greentopowerup;
     }
 
     void SetTurboText()
@@ -423,6 +427,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void shoot(GameObject Project, string tag, bool escalat, int vel) {
+        timeshot = 0.3f;
         shotsound.Play();
         GameObject p = Instantiate(Project, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.Euler(transform.localEulerAngles));
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));

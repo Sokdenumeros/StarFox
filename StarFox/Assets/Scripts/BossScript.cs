@@ -13,7 +13,6 @@ public class BossScript : MonoBehaviour
     public GameObject Projectile2;
     public GameObject Projectile3;
     private float temps;
-    public Text bossText;
     public int bosslifes;
     private bool primer = true;
     private float tipusprojectil;
@@ -32,12 +31,13 @@ public class BossScript : MonoBehaviour
     public AudioSource dispar;
     public AudioSource collect;
     public AudioSource dead;
+    public PB HP;
 
     // Start is called before the first frame update
     void Start()
     {
+        HP.max = bosslifes;
         temps = 0;
-        bossText.text = "No Boss yet";
         tipusmoviment = Random.Range(0.0f, 0.81f);
         stopmov = false;
         prime = true;
@@ -134,7 +134,8 @@ public class BossScript : MonoBehaviour
 
     void SetBossText()
     {
-        bossText.text = "BOSS HP: " + bosslifes;
+        HP.gameObject.SetActive(true);
+        HP.setCurrent(bosslifes);
         if (bosslifes == 0)
         {
             Quaternion q = Quaternion.identity;
