@@ -26,6 +26,7 @@ public class Boss2Script : MonoBehaviour
     private float tempsenemics;
     private float tempsb;
     public AudioSource dispar;
+    public AudioSource dead;
     // Start is called before the first frame update
     void Start()
     {
@@ -156,7 +157,14 @@ public class Boss2Script : MonoBehaviour
     void SetBossText()
     {
         bossText.text = "BOSS HP: " + bosslifes;
-        if (bosslifes == 0) bossdeath();
+        if (bosslifes == 0)
+        {
+            Quaternion q = Quaternion.identity;
+            GameObject p = Instantiate(Explosion, transform.position, q);
+            p.transform.localScale = new Vector3(20.0f, 20.0f, 20.0f);
+            dead.Play();
+            bossdeath();
+        }
 
     }
 
@@ -173,6 +181,7 @@ public class Boss2Script : MonoBehaviour
             SetBossText();
             Quaternion q = Quaternion.identity;
             Instantiate(Explosion, transform.position, q);
+
         }
     }
 

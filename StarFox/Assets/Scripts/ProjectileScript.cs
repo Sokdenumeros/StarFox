@@ -103,10 +103,15 @@ public class ProjectileScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.CompareTag("terrain"))
+        {
+            if(Explosion != null) Instantiate(Explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
         if (tago != "purpleproj" && tago != "blueproj" && tago != "greenproj" && other.gameObject.CompareTag("barrera"))
         {
 
-            Instantiate(Explosion, transform.position, Quaternion.identity);
+            if (Explosion != null) Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
             Destroy(other.gameObject);
@@ -118,7 +123,7 @@ public class ProjectileScript : MonoBehaviour
 
             enemykill.Play();
 
-            Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
+            if (Explosion != null) Instantiate(Explosion, other.gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             
             Destroy(gameObject);
@@ -136,7 +141,7 @@ public class ProjectileScript : MonoBehaviour
         if (tago != "purpleproj" && tago != "blueproj" && tago != "greenproj" && other.gameObject.CompareTag("obstacle"))
         {
 
-            Instantiate(Explosion, transform.position, Quaternion.identity);
+            if (Explosion != null) Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
 
         }

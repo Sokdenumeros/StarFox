@@ -434,6 +434,7 @@ public class PlayerController : MonoBehaviour
         pps.movement = Quaternion.Euler(transform.localEulerAngles)* (new Vector3(0.0f, 0.0f, 1.0f));
         pps.player = gameObject;
         pps.enemykill = enemykill;
+        pps.Explosion = Explosion;
     }
 
     void turboacc()

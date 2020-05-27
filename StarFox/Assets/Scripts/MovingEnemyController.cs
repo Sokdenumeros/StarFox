@@ -53,6 +53,7 @@ public class MovingEnemyController : MonoBehaviour
                     if (transform.localPosition.x > player.transform.position.x + 20) movement = new Vector3(-1, 0, 0);
                     else if (transform.localPosition.x < player.transform.position.x - 20) movement = new Vector3(1, 0, 0);
                     transform.localPosition += movement_constant * speed_constant * Time.deltaTime;
+                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, player.transform.position.z + 60);
                 }
             }
         }

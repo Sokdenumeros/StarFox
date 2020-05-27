@@ -31,6 +31,7 @@ public class BossScript : MonoBehaviour
     public AudioSource movimenta;
     public AudioSource dispar;
     public AudioSource collect;
+    public AudioSource dead;
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +79,7 @@ public class BossScript : MonoBehaviour
 
 
                 transform.localPosition += new Vector3(0, 0, 1) * 30 * Time.deltaTime;
+                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, player.transform.position.z + 150);
 
                 if (stopmov == false)
                 {
@@ -133,7 +135,14 @@ public class BossScript : MonoBehaviour
     void SetBossText()
     {
         bossText.text = "BOSS HP: " + bosslifes;
-        if (bosslifes == 0) bossdeath();
+        if (bosslifes == 0)
+        {
+            Quaternion q = Quaternion.identity;
+            GameObject p = Instantiate(Explosion, transform.position, q);
+            p.transform.localScale = new Vector3(20.0f, 20.0f, 20.0f);
+            dead.Play();
+            bossdeath();
+        }
 
     }
 
