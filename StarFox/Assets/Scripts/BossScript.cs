@@ -31,6 +31,9 @@ public class BossScript : MonoBehaviour
     public AudioSource dispar;
     public AudioSource collect;
     public AudioSource dead;
+    public AudioSource bosssound;
+    public AudioSource musicstop;
+    public AudioSource victory;
     public PB HP;
     public EndgameUI EUI;
 
@@ -72,6 +75,8 @@ public class BossScript : MonoBehaviour
                 temps += Time.deltaTime;
                 if (primer)
                 {
+                    bosssound.Play();
+                    musicstop.Stop();
                     SetBossText();
                     primer = false;
                     transform.localPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + 150);
@@ -150,6 +155,7 @@ public class BossScript : MonoBehaviour
 
     void bossdeath()
     {
+        victory.Play();
         Time.timeScale = 0;
         Destroy(gameObject);
         EUI.Victory();
