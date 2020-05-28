@@ -13619,6 +13619,7 @@ MonoBehaviour:
   dispar: {fileID: 1989924469}
   dead: {fileID: 1151161042}
   HP: {fileID: 288742581}
+  EUI: {fileID: 4853150772454742304}
 --- !u!114 &2065443214 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7403021404817140826, guid: f0fb1e71e1c37354ba416b93605e2582,

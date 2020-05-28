@@ -27,6 +27,7 @@ public class Boss2Script : MonoBehaviour
     public AudioSource dispar;
     public AudioSource dead;
     public PB HP;
+    public EndgameUI EUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -171,6 +172,7 @@ public class Boss2Script : MonoBehaviour
 
     void bossdeath()
     {
+        EUI.Victory();
         Destroy(gameObject);
     }
 

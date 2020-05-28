@@ -7915,6 +7915,7 @@ MonoBehaviour:
   collect: {fileID: 1006612531}
   dead: {fileID: 152914627}
   HP: {fileID: 1421339417}
+  EUI: {fileID: 2108935543}
 --- !u!65 &1265413678
 BoxCollider:
   m_ObjectHideFlags: 0
