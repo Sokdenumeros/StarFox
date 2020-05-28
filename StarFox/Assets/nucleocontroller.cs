@@ -34,6 +34,7 @@ public class nucleocontroller : MonoBehaviour
         if (other.gameObject.CompareTag("Projectile"))
         {
             ++count;
+            nuclivida.gameObject.SetActive(true);
             nuclivida.setCurrent(win - count);
             if (count >= win)
             {

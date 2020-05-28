@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private float turbotimer;
     private float tempsrel;
     private int turbocount;
-    public Text turboText;
+    public BoostUI boostUI;
     public Text powerText;
     private bool barrelroll;
     private int rotation;
@@ -110,10 +110,10 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                shoot(Projectile, "Projectile", true, 100);
+                shoot(Projectile, "Projectile", true, 250);
             }
         }
-        if (Input.GetKey(KeyCode.Space)) if (timeshot <= 0.0f) shoot(Projectile, "Projectile", true, 100);
+        if (Input.GetKey(KeyCode.Space)) if (timeshot <= 0.0f) shoot(Projectile, "Projectile", true, 250);
         if (Input.GetKeyDown(KeyCode.N)){
             turboacc();
             }
@@ -415,7 +415,6 @@ public class PlayerController : MonoBehaviour
 
     void SetTurboText()
     {
-        turboText.text = "TURBOS: " + turbocount.ToString();
     }
 
     void kill() {
@@ -453,6 +452,7 @@ public class PlayerController : MonoBehaviour
             --turbocount;
             turbo = true;
             speed_constant = 40;
+            boostUI.Decrease();
             SetTurboText();
         }
 

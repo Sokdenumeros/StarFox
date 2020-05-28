@@ -79,6 +79,7 @@ MonoBehaviour:
   Projectile: {fileID: 1605502800287180, guid: 2f448f2daa573b94ebfc6a28951422ac, type: 3}
   player: {fileID: 0}
   distdis: 70
+  dispar: {fileID: 0}
 --- !u!114 &8980346104811494670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,13 +123,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8980346104523007602}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 8980346104523342442}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &8980346104522072874
 MeshFilter:
   m_ObjectHideFlags: 0
