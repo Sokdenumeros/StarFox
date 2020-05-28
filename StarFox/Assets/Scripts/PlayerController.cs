@@ -284,7 +284,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         transform.localEulerAngles = new Vector3(-moveVertical * graus , moveHorizontal * graus, -moveHorizontal * graus);
-
     
         if ((dontcrossright && moveHorizontal > 0) || (dontcrossleft && moveHorizontal < 0)) movement = new Vector3(0.0f, moveVertical, 0.0f);
         else {
