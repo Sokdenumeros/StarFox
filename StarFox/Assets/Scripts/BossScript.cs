@@ -150,6 +150,7 @@ public class BossScript : MonoBehaviour
 
     void bossdeath()
     {
+        Time.timeScale = 0;
         Destroy(gameObject);
         EUI.Victory();
     }

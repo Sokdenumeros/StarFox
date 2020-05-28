@@ -172,6 +172,7 @@ public class Boss2Script : MonoBehaviour
 
     void bossdeath()
     {
+        Time.timeScale = 0;
         EUI.Victory();
         Destroy(gameObject);
     }

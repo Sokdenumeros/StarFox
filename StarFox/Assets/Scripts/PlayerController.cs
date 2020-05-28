@@ -421,6 +421,7 @@ public class PlayerController : MonoBehaviour
     void kill() {
         if (!inmortal)
         {
+            Time.timeScale = 0;
             Destroy(gameObject);
             endUI.GameOver();
         }
