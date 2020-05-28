@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private bool baresqu;
     private bool bardreta;
     private float timeshot;
+    public EndgameUI endUI;
 
     void Start()
     {
@@ -421,7 +422,7 @@ public class PlayerController : MonoBehaviour
         if (!inmortal)
         {
             Destroy(gameObject);
-            winText.text = "YOU LOST";
+            endUI.GameOver();
         }
     }
 

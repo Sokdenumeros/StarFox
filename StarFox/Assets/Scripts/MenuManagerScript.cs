@@ -25,7 +25,6 @@ public class MenuManagerScript : MonoBehaviour
 
     public void Quit() {
         Application.Quit();
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
     public void Credits() {

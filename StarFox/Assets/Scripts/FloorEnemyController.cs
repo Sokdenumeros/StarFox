@@ -46,7 +46,7 @@ public class FloorEnemyController : MonoBehaviour
 
     void shoot()
     {
-        if (IsAttacking)
+        if (IsAttacking && player != null)
         {
             Quaternion q = Quaternion.identity;
             q.SetLookRotation(new Vector3(0, 1, 0), player.transform.position - transform.position);
