@@ -42,12 +42,15 @@ public class ProjectileScript : MonoBehaviour
                     primer = false;
                 }
                 //transform.localScale = new Vector3(Time.deltaTime*2, Time.deltaTime*2, Time.deltaTime*2);
-                Vector3 targetDir = player.transform.position - transform.position;
-                float step = speed * Time.deltaTime;
-                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-                transform.rotation = Quaternion.LookRotation(newDir);
+                if (player != null)
+                {
+                    Vector3 targetDir = player.transform.position - transform.position;
+                    float step = speed * Time.deltaTime;
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                    transform.rotation = Quaternion.LookRotation(newDir);
 
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+                }
 
                 temps += Time.deltaTime;
 

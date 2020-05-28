@@ -155,6 +155,7 @@ public class BossScript : MonoBehaviour
 
     void bossdeath()
     {
+        bosssound.Stop();
         victory.Play();
         Time.timeScale = 0;
         Destroy(gameObject);
