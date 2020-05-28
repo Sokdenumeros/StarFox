@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         if (Input.GetKey(KeyCode.Space)) if (timeshot <= 0.0f) shoot(Projectile, "Projectile", true, 250);
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         if (Input.GetKeyDown(KeyCode.N)){
             turboacc();
             }
@@ -430,7 +432,7 @@ public class PlayerController : MonoBehaviour
     void shoot(GameObject Project, string tag, bool escalat, int vel) {
         timeshot = 0.3f;
         shotsound.Play();
-        GameObject p = Instantiate(Project, transform.position+ new Vector3(0.0f, 0.0f, 1.0f), Quaternion.Euler(transform.localEulerAngles));
+        GameObject p = Instantiate(Project, transform.position + new Vector3(0.0f, 0.0f, 1.0f), Quaternion.Euler(transform.localEulerAngles));
         ProjectileScript pps = (ProjectileScript)p.GetComponent(typeof(ProjectileScript));
         p.transform.Rotate(new Vector3 (90,0,0));
         if(escalat) p.transform.localScale = new Vector3(0.38035f, 2.96248f, 0.32064f);
