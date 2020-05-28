@@ -12,7 +12,7 @@ public class PB : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -25,4 +25,6 @@ public class PB : MonoBehaviour
     {
         Msk.fillAmount = (float)current / (float)max;
     }
+
+    public void setColor (Color32 C) { Msk.color = C; }
 }

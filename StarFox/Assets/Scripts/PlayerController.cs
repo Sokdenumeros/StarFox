@@ -154,7 +154,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 inmortal = !inmortal;
-            }
+            if (inmortal) hp.setColor(new Color32(255, 255, 0, 255));
+            else hp.setColor(new Color32(0, 255, 0, 255));
+            health = 100;
+            SetCountText();
+        }
 
 
 
