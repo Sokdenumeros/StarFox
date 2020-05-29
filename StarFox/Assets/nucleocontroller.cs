@@ -13,6 +13,7 @@ public class nucleocontroller : MonoBehaviour
     public GameObject nau1;
     public GameObject nau2;
     public PB nuclivida;
+    public AudioSource explo;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class nucleocontroller : MonoBehaviour
             nuclivida.setCurrent(win - count);
             if (count >= win)
             {
+                explo.Play();
                 Destroy(gameObject);
                 
                 Quaternion q = Quaternion.identity;
