@@ -101,9 +101,9 @@ public class PlayerController : MonoBehaviour
         countpower = 0;
         time = 0;
         graus = 45;
-        turbollum.GetComponent<ParticleSystem>().enableEmission = false;
-        turbollume.GetComponent<ParticleSystem>().enableEmission = true;
-        turbollumd.GetComponent<ParticleSystem>().enableEmission = true;
+        var em = turbollum.GetComponent<ParticleSystem>().emission; em.enabled = false;
+        var em2 = turbollume.GetComponent<ParticleSystem>().emission; em2.enabled = true;
+        var em3 = turbollumd.GetComponent<ParticleSystem>().emission; em3.enabled = true;
         esquerrano = true;
         dretano = true;
 
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
                     speed_constant = 30;
                     turbotimer = 0;
                     turbo = false;
-                turbollum.GetComponent<ParticleSystem>().enableEmission = false;
+                var em = turbollum.GetComponent<ParticleSystem>().emission; em.enabled = false;
                 //turbollum.Pause();
             }
             }
@@ -475,7 +475,7 @@ public class PlayerController : MonoBehaviour
         if (turbocount > 0)
         {
 
-            turbollum.GetComponent<ParticleSystem>().enableEmission = true; //turbollum.Play();
+            var em = turbollum.GetComponent<ParticleSystem>().emission; em.enabled = true; //turbollum.Play();
 
             nitro.Play();
             if(!inmortal)--turbocount;
