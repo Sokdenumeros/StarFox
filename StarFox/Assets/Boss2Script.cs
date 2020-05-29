@@ -28,6 +28,7 @@ public class Boss2Script : MonoBehaviour
     public AudioSource dead;
     public PB HP;
     public EndgameUI EUI;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +60,7 @@ public class Boss2Script : MonoBehaviour
             {
                 tempsb += Time.deltaTime;
                 transform.localPosition += new Vector3(player.transform.position.x, player.transform.position.y + 50, -player.transform.position.z).normalized * 60 * Time.deltaTime;
-
+                
                 if (tempsb >= 2)
                 {
                     tempsb = 0;
@@ -86,8 +87,9 @@ public class Boss2Script : MonoBehaviour
 
                     tempsb += Time.deltaTime;
                     transform.localPosition += new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z).normalized * 60 * Time.deltaTime;
+                  
 
-                    if (tempsb >= 1)
+                    if (tempsb >= 0.5)
                     {
                         tempsb = 0;
                         temps = 0;
@@ -128,12 +130,14 @@ public class Boss2Script : MonoBehaviour
 
                 }
 
+
                 moviment(position);
 
             }
 
             transform.localPosition += new Vector3(0, 0, 1) * 30 * Time.deltaTime;
-           }
+           
+        }
     }
 
     void creaProjectil(GameObject Projectile, string tag, int sp)

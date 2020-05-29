@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
             damaged.Play();
         }
 
-        else if (other.gameObject.CompareTag("obstacle") || other.gameObject.CompareTag("terrain"))
+        else if (other.gameObject.CompareTag("obstacle") || other.gameObject.CompareTag("terrain") || other.gameObject.CompareTag("Boss"))
 
         {
             Instantiate(Explosion, transform.position, Quaternion.identity);
