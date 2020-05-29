@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         turbollume.GetComponent<ParticleSystem>().enableEmission = true;
         turbollumd.GetComponent<ParticleSystem>().enableEmission = true;
         esquerrano = true;
-        dretano = false;
+        dretano = true;
 
     }
 
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
                         rotation = 0;
                         barrelroll = false;
                         baresqu = false;
-                    dretano = false;
+                    dretano = true;
                     }
 
                 }
@@ -445,6 +445,7 @@ public class PlayerController : MonoBehaviour
     void kill() {
         if (!inmortal)
         {
+            hp.setCurrent(0);
             musicstop.Stop();
             losssound.Play();
             Time.timeScale = 0;
