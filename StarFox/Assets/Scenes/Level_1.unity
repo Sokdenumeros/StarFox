@@ -6581,6 +6581,16 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 700091962270095540, guid: f279e7f42e0e1824d8f9c34934a33484,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 700091962270095540, guid: f279e7f42e0e1824d8f9c34934a33484,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 700091962270095541, guid: f279e7f42e0e1824d8f9c34934a33484,
         type: 3}
       propertyPath: speedbarrel
