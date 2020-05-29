@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
                 if (dretano = true && bardreta == false  && Input.GetAxis("Horizontal") > 0)
                 {
                     bardreta = true;
+                baresqu = false;
                 esquerrano = false;
                     spin.Play();
             }
@@ -201,26 +202,24 @@ public class PlayerController : MonoBehaviour
                 {
                     baresqu = true;
                     spin.Play();
+                bardreta = false;
                 dretano = false;
             }
 
             if (bardreta)
+            {
+                transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
+                rotation = rotation + 5;
+                if (rotation == 360)
                 {
-                
-                    transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
-                    rotation = rotation + 5;
-                    if (rotation == 360)
-                    {
-                        rotation = 0;
-                        barrelroll = false;
-                        bardreta = false;
+                    rotation = 0;
+                    barrelroll = false;
+                    bardreta = false;
                     esquerrano = true;
                 }
-
-                }
-
-                else if (baresqu)
-                {
+            }
+            else if (baresqu)
+            {
                 dretano = false;
                 transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotation);
                     rotation = rotation + 5;
@@ -233,7 +232,6 @@ public class PlayerController : MonoBehaviour
                     }
 
                 }
-                
 
             }
 
@@ -269,29 +267,7 @@ public class PlayerController : MonoBehaviour
                 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
             }
 
-        if (visionula)
-        {
-
-            tempsvisionula += Time.deltaTime;
-
-            insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
-            if (esquerra)
-            {
-                camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
-                esquerra = false;
-            }
-            else if (!esquerra)
-            {
-                camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
-                esquerra = true;
-            }
-            if (tempsvisionula >= 5)
-            {
-                insect.transform.localPosition = new Vector3(-10, -10, -10);
-                tempsvisionula = 0;
-                visionula = false;
-            }
-        }
+        vn();
          
 
        
@@ -315,6 +291,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        
 
         movementController();
     }
@@ -329,6 +306,32 @@ public class PlayerController : MonoBehaviour
         }
         else rb.velocity = Quaternion.Euler(transform.localEulerAngles) * (new Vector3(0.0f, 0.0f, speed_constant));
         
+    }
+
+    void vn() {
+        if (visionula)
+        {
+
+            tempsvisionula += Time.deltaTime;
+
+            insect.transform.localPosition = new Vector3(camera.transform.position.x, camera.transform.position.y - 3, camera.transform.position.z + 3);
+            if (esquerra)
+            {
+                camera.transform.localPosition += new Vector3(1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = false;
+            }
+            else if (!esquerra)
+            {
+                camera.transform.localPosition += new Vector3(-1, 0, 0) * 5 * Time.deltaTime;
+                esquerra = true;
+            }
+            if (tempsvisionula >= 5)
+            {
+                insect.transform.localPosition = new Vector3(-10, -10, -10);
+                tempsvisionula = 0;
+                visionula = false;
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
