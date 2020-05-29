@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public ParticleSystem turbollum;
+    public ParticleSystem turbollume;
+    public ParticleSystem turbollumd;
     public GameObject Explosion;
     public float speed;
     public GameObject Focturbo;
@@ -60,6 +62,10 @@ public class PlayerController : MonoBehaviour
     private bool bardreta;
     private float timeshot;
     public EndgameUI endUI;
+    public AudioSource losssound;
+    public AudioSource musicstop;
+    private bool esquerrano;
+    private bool dretano;
 
     void Start()
     {
@@ -95,7 +101,11 @@ public class PlayerController : MonoBehaviour
         countpower = 0;
         time = 0;
         graus = 45;
-        turbollum.Pause();
+        turbollum.GetComponent<ParticleSystem>().enableEmission = false;
+        turbollume.GetComponent<ParticleSystem>().enableEmission = true;
+        turbollumd.GetComponent<ParticleSystem>().enableEmission = true;
+        esquerrano = true;
+        dretano = false;
 
     }
 
@@ -106,7 +116,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (countpower == greentopowerup) {
-                shoot(Projectile_power, "Projectile_power", false, 60);
+                shoot(Projectile_power, "Projectile_power", false, 100);
                 countpower = 0;
                 SetPowerText();
             }
@@ -123,7 +133,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.B))
             {
 
-                if (time == 0 && Input.GetAxis("Horizontal") != 0)
+                if ((time == 0 && Input.GetAxis("Horizontal") != 0) || inmortal)
                 {
                     barrelroll = true;
                     
@@ -173,26 +183,30 @@ public class PlayerController : MonoBehaviour
                     speed_constant = 30;
                     turbotimer = 0;
                     turbo = false;
-                    turbollum.Pause();
-                }
+                turbollum.GetComponent<ParticleSystem>().enableEmission = false;
+                //turbollum.Pause();
+            }
             }
 
             if (barrelroll)
             {
-                if (bardreta == false  && Input.GetAxis("Horizontal") > 0)
+                if (dretano = true && bardreta == false  && Input.GetAxis("Horizontal") > 0)
                 {
                     bardreta = true;
+                esquerrano = false;
                     spin.Play();
             }
 
-                else if(baresqu == false  && Input.GetAxis("Horizontal") < 0 )
+                else if(esquerrano = true && baresqu == false  && Input.GetAxis("Horizontal") < 0 )
                 {
                     baresqu = true;
                     spin.Play();
+                dretano = false;
             }
 
-                if (bardreta)
+            if (bardreta)
                 {
+                
                     transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
                     rotation = rotation + 5;
                     if (rotation == 360)
@@ -200,20 +214,22 @@ public class PlayerController : MonoBehaviour
                         rotation = 0;
                         barrelroll = false;
                         bardreta = false;
-                    }
+                    esquerrano = true;
+                }
 
                 }
 
                 else if (baresqu)
                 {
-
-                    transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotation);
+                dretano = false;
+                transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotation);
                     rotation = rotation + 5;
                     if (rotation == 360)
                     {
                         rotation = 0;
                         barrelroll = false;
                         baresqu = false;
+                    dretano = false;
                     }
 
                 }
@@ -399,18 +415,21 @@ public class PlayerController : MonoBehaviour
 
     void SetBarrelText()
     {
-        if (time > 0)
-        {
-            time += Time.deltaTime;
-            barrelR.setCurrent(time);
-            barrelR.gameObject.SetActive(true);
-        }
-        if (time >= 5)
-        {
-            barrelR.setCurrent(5);
-            barrelR.gameObject.SetActive(false);
-            time = 0;
-        }
+            if (time > 0)
+            {
+                time += Time.deltaTime;
+                barrelR.setCurrent(time);
+                barrelR.gameObject.SetActive(true);
+            }
+            if (time >= 5)
+            {
+                barrelR.setCurrent(5);
+                barrelR.gameObject.SetActive(false);
+                time = 0;
+            }
+
+          
+        
     }
 
     void SetPowerText()
@@ -426,6 +445,8 @@ public class PlayerController : MonoBehaviour
     void kill() {
         if (!inmortal)
         {
+            musicstop.Stop();
+            losssound.Play();
             Time.timeScale = 0;
             Destroy(gameObject);
             endUI.GameOver();
@@ -453,13 +474,13 @@ public class PlayerController : MonoBehaviour
         if (turbocount > 0)
         {
 
-            turbollum.Play();
+            turbollum.GetComponent<ParticleSystem>().enableEmission = true; //turbollum.Play();
 
             nitro.Play();
-            --turbocount;
+            if(!inmortal)--turbocount;
             turbo = true;
-            speed_constant = 40;
-            boostUI.Decrease();
+            speed_constant = 50;
+            if(!inmortal)boostUI.Decrease();
             SetTurboText();
         }
 

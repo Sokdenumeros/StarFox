@@ -28,6 +28,10 @@ public class Boss2Script : MonoBehaviour
     public AudioSource dead;
     public PB HP;
     public EndgameUI EUI;
+    public AudioSource bosssound;
+    public AudioSource musicstop;
+    public AudioSource victory;
+    private bool star;
    
     // Start is called before the first frame update
     void Start()
@@ -43,6 +47,7 @@ public class Boss2Script : MonoBehaviour
         quiet = false;
         tempsenemics = 0;
         first = true;
+        star = true;
     }
 
     // Update is called once per frame
@@ -56,6 +61,12 @@ public class Boss2Script : MonoBehaviour
 
         if (player != null && player.transform.position.z >= 1391.5)
         {
+            if(star)
+            {
+                musicstop.Stop();
+                bosssound.Play();
+                star = false;
+            }
             if(first)
             {
                 tempsb += Time.deltaTime;
@@ -63,6 +74,7 @@ public class Boss2Script : MonoBehaviour
                 
                 if (tempsb >= 2)
                 {
+
                     tempsb = 0;
                     first = false;
                     SetBossText();
@@ -176,6 +188,8 @@ public class Boss2Script : MonoBehaviour
 
     void bossdeath()
     {
+        bosssound.Stop();
+        victory.Play();
         Time.timeScale = 0;
         EUI.Victory();
         Destroy(gameObject);
@@ -200,7 +214,7 @@ public class Boss2Script : MonoBehaviour
         if (quiet)
         {
             tempsmov += Time.deltaTime;
-            if (tempsmov >= 1)
+            if (tempsmov >= 2)
             {
                 stopmov = false;
                 quiet = false;

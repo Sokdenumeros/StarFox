@@ -59,7 +59,7 @@ public class BossScript : MonoBehaviour
             tipusprojectil = Random.Range(0.0f, 3.1f);
 
 
-            if (player.transform.position.z >= 889.5529)
+            if (player.transform.position.z >= 950.5529)
             {
                 tempsenemics += Time.deltaTime;
                 if (tempsenemics >= 5)
@@ -180,7 +180,7 @@ public class BossScript : MonoBehaviour
         if (quiet)
         {
             tempsmov += Time.deltaTime;
-            if (tempsmov >= 1)
+            if (tempsmov >= 2)
             {
                 stopmov = false;
                 quiet = false;
