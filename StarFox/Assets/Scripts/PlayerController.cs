@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource musicstop;
     private bool esquerrano;
     private bool dretano;
+    private float speedaux;
 
     void Start()
     {
@@ -180,7 +181,7 @@ public class PlayerController : MonoBehaviour
                 turbotimer += Time.deltaTime;
                 if (turbotimer >= 1)
                 {
-                    speed_constant = 30;
+                    speed_constant = speedaux;
                     turbotimer = 0;
                     turbo = false;
                 var em = turbollum.GetComponent<ParticleSystem>().emission; em.enabled = false;
@@ -368,8 +369,9 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("redvelcol"))
         {
-            speed_constant = 30;
-            speedbarrel = 37;
+                speed_constant = 30;
+                speedbarrel = 37;
+            
             
         }
 
@@ -482,8 +484,9 @@ public class PlayerController : MonoBehaviour
 
             nitro.Play();
             if(!inmortal)--turbocount;
+            speedaux = speed_constant;
             turbo = true;
-            speed_constant = 50;
+            speed_constant = 60;
             if(!inmortal)boostUI.Decrease();
             SetTurboText();
         }

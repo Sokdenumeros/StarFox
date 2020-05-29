@@ -10,7 +10,7 @@ public class MenuPlayerController : MonoBehaviour
     public GameObject Explosion;
     public AudioSource enemykill;
     private bool barrelroll;
-    private int rotation;
+    private float rotation;
     private int brInc;
     // Start is called before the first frame update
     void Start()
@@ -25,12 +25,12 @@ public class MenuPlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) if (timeshot <= 0.0f) shoot(Projectile, "Projectile", true, 250);
         if (Input.GetKeyDown(KeyCode.B)) {
             if (!barrelroll && Input.GetAxis("Horizontal") != 0) barrelroll = true;
-            if (barrelroll && Input.GetAxis("Horizontal") > 0) brInc = 2;
-            else if (barrelroll && Input.GetAxis("Horizontal") < 0) brInc = -2;
+            if (barrelroll && Input.GetAxis("Horizontal") > 0) brInc = 500;
+            else if (barrelroll && Input.GetAxis("Horizontal") < 0) brInc = -500;
         }
         if (barrelroll) {
-            rotation += brInc;
-            if (rotation == brInc*180) { barrelroll = false; rotation = 0; }
+            rotation += brInc*Time.deltaTime;
+            if (rotation > 360 && brInc > 0 || rotation < -360 && brInc < 0) { barrelroll = false; rotation = 0; }
             else transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
         }
     }

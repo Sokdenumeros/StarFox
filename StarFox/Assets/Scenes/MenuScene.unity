@@ -1532,6 +1532,10 @@ PrefabInstance:
       propertyPath: looping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8937547080097884410, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 416b2492ca9d1b140874c7ba41cb3214, type: 3}
