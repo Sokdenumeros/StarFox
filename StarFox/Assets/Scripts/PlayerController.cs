@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public BoostUI boostUI;
     public Text powerText;
     private bool barrelroll;
-    private int rotation;
+    private float rotation;
     public AudioSource shotsound;
     public AudioSource enemykill;
     public AudioSource damaged;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(0, 0, 0);
         health = 100;
         hp.max = 100;
-        barrelR.max = 5;
+        barrelR.max = 3;
         SetCountText();
         SetPowerText();
         winText.text = "";
@@ -209,8 +209,8 @@ public class PlayerController : MonoBehaviour
             if (bardreta)
             {
                 transform.localEulerAngles = new Vector3(0.0f, 0.0f, -rotation);
-                rotation = rotation + 5;
-                if (rotation == 360)
+                rotation = rotation + Time.deltaTime * 500;
+                if (rotation >= 360)
                 {
                     rotation = 0;
                     barrelroll = false;
@@ -222,8 +222,8 @@ public class PlayerController : MonoBehaviour
             {
                 dretano = false;
                 transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotation);
-                    rotation = rotation + 5;
-                    if (rotation == 360)
+                    rotation = rotation + Time.deltaTime * 500;
+                    if (rotation >= 360)
                     {
                         rotation = 0;
                         barrelroll = false;
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
                 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
             }
 
-        vn();
+        
          
 
        
@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        
+        vn();
 
         movementController();
     }
@@ -424,9 +424,9 @@ public class PlayerController : MonoBehaviour
                 barrelR.setCurrent(time);
                 barrelR.gameObject.SetActive(true);
             }
-            if (time >= 5)
+            if (time >= 3)
             {
-                barrelR.setCurrent(5);
+                barrelR.setCurrent(3);
                 barrelR.gameObject.SetActive(false);
                 time = 0;
             }
