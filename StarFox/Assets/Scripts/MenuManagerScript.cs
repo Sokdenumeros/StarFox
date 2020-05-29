@@ -8,6 +8,8 @@ public class MenuManagerScript : MonoBehaviour
 {
     public GameObject menu;
     public GameObject credits;
+    public GameObject instructions;
+    public GameObject pickup;
 
     public void loadScene1() {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
@@ -32,15 +34,24 @@ public class MenuManagerScript : MonoBehaviour
         menu.SetActive(false);
     }
 
-    public void BackFromCredits() {
+    public void Instructions() {
+        instructions.SetActive(true);
+        menu.SetActive(false);
+        pickup.SetActive(true);
+
+    }
+
+    public void BackToMenu() {
+        instructions.SetActive(false);
         credits.SetActive(false);
         menu.SetActive(true);
+        pickup.SetActive(false);
     }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        credits.SetActive(false);
     }
 
     // Update is called once per frame
